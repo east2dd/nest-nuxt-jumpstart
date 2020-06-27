@@ -20,7 +20,6 @@ export class AuthService {
   }
 
   public async register(params: AuthRegisterDto): Promise<User> {
-    console.log(this.userRepository)
     return await new AuthRegisterService(this.userRepository).call(params)
   }
 

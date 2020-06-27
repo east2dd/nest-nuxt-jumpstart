@@ -1,0 +1,9 @@
+.nuxt
+node_modules
+jest.config.js
+nuxt.config.js
+tailwind.config.js
+app/plugins/theme
+dist
+cypress
+coverage
