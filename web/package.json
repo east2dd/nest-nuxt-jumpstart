@@ -21,7 +21,6 @@
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/dotenv": "^1.4.0",
     "@nuxtjs/pwa": "^3.0.0-0",
-    "firebase": "^7.15.0",
     "mime": "^2.4.6",
     "nuxt": "^2.0.0",
     "pupa": "^2.0.1",
