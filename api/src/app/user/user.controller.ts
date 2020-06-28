@@ -1,4 +1,4 @@
-import { Controller, Get, Req, UseGuards, Body, Post, BadRequestException, Param, Put } from '@nestjs/common'
+import { Controller, Get, Req, UseGuards, Body, Post, BadRequestException, Param, Put, Delete } from '@nestjs/common'
 import { Request } from '../../common/request'
 import {
   ApiOperation,
@@ -39,11 +39,24 @@ export class UserController {
   @ApiOperation({ description: 'Update a user'})
   public async update(
     @Req() req: Request,
-    @Param('userId') userId: string,
+    @Param('userId') userId: number,
     @Body() params: UpdateUserDto
   ) {
     try {
       return await this.userService.update(userId, params)
+    } catch (e) {
+      throw new BadRequestException(e.message)
+    }
+  }
+
+  @Delete(':userId')
+  @ApiOperation({ description: 'Delete a user'})
+  public async destroy(
+    @Req() req: Request,
+    @Param('userId') userId: number
+  ) {
+    try {
+      return await this.userService.destroy(userId)
     } catch (e) {
       throw new BadRequestException(e.message)
     }    

@@ -28,14 +28,14 @@ export class ApartmentService {
     return this.apartmentRepository.save(params)
   }
 
-  async update(id, params: UpdateApartmentDto): Promise<Apartment> {
+  async update(id: number, params: UpdateApartmentDto): Promise<Apartment> {
     const user = await this.find(id)
     Object.assign(user, params)
 
     return this.apartmentRepository.save(user)
   }
 
-  async destroy(id): Promise<boolean>{
+  async destroy(id: number): Promise<boolean>{
     this.apartmentRepository.delete({ id: id })
 
     return true

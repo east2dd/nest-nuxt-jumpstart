@@ -27,10 +27,16 @@ export class UserService {
     return registerService.call(params)
   }
 
-  async update(id, params: UpdateUserDto): Promise<User> {
+  async update(id: number, params: UpdateUserDto): Promise<User> {
     const user = await this.find(id)
     Object.assign(user, params)
 
     return this.userRepository.save(user)
+  }
+
+  async destroy(id: number): Promise<boolean>{
+    this.userRepository.delete({ id: id })
+
+    return true
   }
 }
