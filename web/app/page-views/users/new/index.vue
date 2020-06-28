@@ -1,12 +1,12 @@
 <script lang="ts">
 import Vue from 'vue'
 import { required } from 'vuelidate/lib/validators'
-import { Apartment } from './interfaces'
+import { User } from './interfaces'
 
 export default Vue.extend({
   data() {
     return {
-      item: {} as Apartment,
+      item: {} as User,
       submitted: false
     }
   },
@@ -24,15 +24,15 @@ export default Vue.extend({
       if (this.$v.$invalid) return
 
       const formData = new FormData(
-        this.$refs['create-apartment'] as HTMLFormElement | undefined
+        this.$refs['create-user'] as HTMLFormElement | undefined
       )
 
-      this.$store.dispatch('apartments/createApartment', formData).then(() => {
+      this.$store.dispatch('users/createUser', formData).then(() => {
         this.openList()
       })
     },
     openList() {
-      this.$router.push('/apartments')
+      this.$router.push('/users')
     }
   }
 })
@@ -46,12 +46,12 @@ export default Vue.extend({
           <div class="card-title mb-0">
             <i class="far fa-play-circle fa-rotate-180 fa-lg"></i>
             <h2 class="d-inline-block text-warning align-middle mb-0 ml-2">
-              NEW APARTMENT
+              NEW USER
             </h2>
           </div>
         </div>
         <div class="card-body bg-light">
-          <b-form ref="create-apartment" @submit.prevent="createApartment">
+          <b-form ref="create-user" @submit.prevent="createUser">
             <div class="row mt-2">
               <div class="col-md-6">
                 <b-form-input

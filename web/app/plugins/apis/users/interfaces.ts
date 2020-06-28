@@ -1,11 +1,11 @@
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
-import { CreateApartmentDto } from './dto'
+import { CreateUserDto } from './dto'
 
-export interface ApartmentApiInterface {
+export interface UserApiInterface {
   $axios: NuxtAxiosInstance
 
   all(): Promise<any>
   get(id: string): Promise<any>
-  create(params: CreateApartmentDto): void
+  create(params: CreateUserDto): void
   destroy(id: string): Promise<any>
 }

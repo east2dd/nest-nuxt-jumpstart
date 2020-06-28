@@ -100,21 +100,21 @@ export default {
       <li>
         <nuxt-link to="/apartments" class="side-nav-link-ref">
           <i class="fas fa-home"></i>
-          Apartments
+          <span>Apartments</span>
         </nuxt-link>
       </li>
 
       <li>
         <nuxt-link to="/users" class="side-nav-link-ref">
           <i class="fas fa-user"></i>
-          Users
+          <span>Users</span>
         </nuxt-link>
       </li>
 
       <li>
         <a href="#" class="side-nav-link-ref" @click="logout">
           <i class="fas fa-power-off"></i>
-          Log Out
+          <span>Log Out</span>
         </a>
       </li>
     </ul>

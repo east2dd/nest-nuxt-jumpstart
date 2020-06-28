@@ -39,10 +39,10 @@ export default Vue.extend({
       })
     },
     openShowPage(id: string) {
-      this.$router.push(`/appartments/${id}`)
+      this.$router.push(`/apartments/${id}`)
     },
     openNewPage() {
-      this.$router.push(`/appartments/new`)
+      this.$router.push(`/apartments/new`)
     }
   }
 })
@@ -56,7 +56,7 @@ export default Vue.extend({
           <div class="row">
             <div class="col-md-9">
               <div class="card-title">
-                <h2 class="text-warning">MY APARTMENTS</h2>
+                <h2 class="text-warning">APARTMENTS</h2>
               </div>
             </div>
             <div class="col-md-3 text-md-right my-auto">

@@ -17,7 +17,7 @@ export const mutations: MutationTree<TicketModuleState> = {
 
 export const actions: ActionTree<TicketModuleState, RootState> = {
   getApartments({ commit, dispatch }) {
-    return ApartmentsApi.fetchApartments()
+    return ApartmentsApi.all()
       .then((res: any) => {
         commit(SET_APARTMENTS, res.apartments)
       })
@@ -28,8 +28,8 @@ export const actions: ActionTree<TicketModuleState, RootState> = {
         throw err
       })
   },
-  getTicket({ commit, dispatch }, id) {
-    return ApartmentsApi.fetchApartment(id)
+  getApartment({ commit, dispatch }, id) {
+    return ApartmentsApi.get(id)
       .then((item: any) => {
         commit(SET_APARTMENT, item)
       })
@@ -41,9 +41,9 @@ export const actions: ActionTree<TicketModuleState, RootState> = {
       })
   },
   createApartment({ dispatch }, params) {
-    return ApartmentsApi.createApartment(params)
+    return ApartmentsApi.create(params)
       .then(() => {
-        dispatch('alerts/alertSuccess', 'Apartment is successfully created', {
+        dispatch('alerts/alertSuccess', 'Created Successfully', {
           root: true
         })
       })
@@ -55,9 +55,9 @@ export const actions: ActionTree<TicketModuleState, RootState> = {
       })
   },
   deleteApartment({ dispatch }, id) {
-    return ApartmentsApi.deleteApartment(id)
+    return ApartmentsApi.destroy(id)
       .then(() => {
-        dispatch('alerts/alertSuccess', 'Apartment is successfully deleted', {
+        dispatch('alerts/alertSuccess', 'Deleted Successfully', {
           root: true
         })
       })

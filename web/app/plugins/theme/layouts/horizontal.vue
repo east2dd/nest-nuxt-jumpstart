@@ -26,9 +26,6 @@ export default {
   methods: {
     toggleRightSidebar() {
       document.body.classList.toggle("right-bar-enabled");
-    },
-    hideRightSidebar() {
-      document.body.classList.remove("right-bar-enabled");
     }
   }
 };

@@ -7,7 +7,6 @@ export const FIELDS = [
   },
   {
     key: 'email',
-    label: 'Submitter',
     sortable: true,
     thClass: 'text-info align-middle border-secondary',
     tdClass: 'align-middle'

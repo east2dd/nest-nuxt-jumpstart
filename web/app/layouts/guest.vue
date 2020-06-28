@@ -1,24 +1,24 @@
 <script>
-import Horizontal from './horizontal'
+import Footer from '~/components/footer'
 
 export default {
-  components: { Horizontal },
-  data() {
-    return {}
-  },
-  computed: {
-    layoutType() {
-      return this.$root.layoutType
-    }
-  },
-  methods: {}
+  components: {
+    Footer,
+  }
 }
 </script>
 
 <template>
   <div>
-    <Horizontal>
-      <nuxt />
-    </Horizontal>
+    <div id="layout-wrapper">
+      <div class="main-content">
+        <div class="page-content">
+          <div class="container-fluid">
+            <nuxt />
+          </div>
+        </div>
+        <Footer />
+      </div>
+    </div>
   </div>
 </template>

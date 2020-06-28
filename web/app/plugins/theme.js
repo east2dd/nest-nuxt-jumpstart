@@ -23,7 +23,3 @@ Vue.use(VueGoogleMaps, {
   installComponents: true
 })
 Vue.component('apexchart', VueApexCharts)
-Vue.component(
-  'dynamic-component',
-  require('./theme/components/dynamic-component').default
-)

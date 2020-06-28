@@ -12,9 +12,7 @@ export default Vue.extend({
       pageOptions: [5, 10, 25, 50, 100],
       currentPage: 1,
       sortBy: 'name',
-      sortDesc: true,
-      filter: '',
-      filterOn: ['name']
+      sortDesc: true
     }
   },
   computed: {
@@ -22,11 +20,7 @@ export default Vue.extend({
       return this.$store.state.apartments.items
     },
     tableData(): User[] {
-      const items: User[] = this.items
-
-      this.onFiltered(items)
-
-      return items
+      return this.items
     },
     pageCount(): number {
       return Math.ceil(this.totalRows / this.perPage)
@@ -39,9 +33,8 @@ export default Vue.extend({
     fetchList() {
       this.$store.dispatch('users/getUsers')
     },
-    onFiltered(filteredItems: User[]) {
-      this.totalRows = filteredItems.length
-      this.currentPage = 1
+    openNewPage() {
+      this.$router.push(`/users/new`)
     },
     openShowPage(id: string) {
       this.$router.push(`/users/${id}`)
@@ -56,31 +49,19 @@ export default Vue.extend({
       <div class="card">
         <div class="card-body">
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-9">
               <div class="card-title">
                 <h2 class="text-warning">USERS</h2>
               </div>
             </div>
+            <div class="col-md-3 text-md-right my-auto">
+              <button class="btn btn-warning" @click="openNewPage">
+                New User
+              </button>
+            </div>
           </div>
         </div>
         <div class="card-body bg-light">
-          <div>
-            <div class="input-group">
-              <input
-                v-model="filter"
-                type="text"
-                class="form-control"
-                placeholder="Enter Ticket # or Subject"
-              />
-              <div class="input-group-append">
-                <button class="btn btn-info" type="button">Filter</button>
-              </div>
-            </div>
-            <p class="small text-muted">
-              {{ totalRows }} Records Found, Page {{ currentPage }} of
-              {{ pageCount }}
-            </p>
-          </div>
           <div>
             <div class="table-responsive mb-0">
               <b-table
@@ -91,9 +72,6 @@ export default Vue.extend({
                 :current-page="currentPage"
                 :sort-by.sync="sortBy"
                 :sort-desc.sync="sortDesc"
-                :filter="filter"
-                :filter-included-fields="filterOn"
-                @filtered="onFiltered"
               >
                 <template v-slot:cell(subject)="row">
                   {{ '#' + row.item.tid + ' - ' + row.value }}
