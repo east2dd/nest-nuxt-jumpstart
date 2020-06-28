@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { ConfigModule } from '@nestjs/config'
+import { RouterModule, Routes } from 'nest-router'
 import { TYPE_ORM_MODULE_OPTIONS } from './config/database'
 import { UserModule } from './app/user/user.module'
-import { RouterModule, Routes } from 'nest-router'
 import { AuthModule } from './app/auth/auth.module'
+import { ApartmentModule } from './app/apartment/apartment.module'
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
         path: '/users',
         module: UserModule
       },
+      {
+        path: '/apartments',
+        module: ApartmentModule
+      },
     ]
   }
 ]
@@ -28,7 +33,8 @@ const routes: Routes = [
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot(TYPE_ORM_MODULE_OPTIONS),
     AuthModule,
-    UserModule
+    UserModule,
+    ApartmentModule
   ],
   controllers: [],
   providers: [],
