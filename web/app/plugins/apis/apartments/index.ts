@@ -18,11 +18,7 @@ export const get = (id: string): Promise<any> => {
 }
 
 export const create = (params: CreateApartmentDto) => {
-  return $axios.$post(apiUrl(APARTMENTS_URL), params, {
-    headers: {
-      'Content-Type': 'multipart/form-data'
-    }
-  })
+  return $axios.$post(apiUrl(APARTMENTS_URL), params)
 }
 
 export const destroy = (id: string): Promise<any> => {

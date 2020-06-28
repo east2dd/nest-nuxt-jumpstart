@@ -31,7 +31,7 @@ export default Vue.extend({
   },
   methods: {
     fetchList() {
-      this.$store.dispatch('apartments/getApartments')
+      return this.$store.dispatch('apartments/getApartments')
     },
     deleteItem(id: number) {
       this.$store.dispatch('apartments/deleteApartment', id).then(() => {

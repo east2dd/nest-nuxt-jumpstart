@@ -8,14 +8,10 @@ export class Apartment extends BaseEntity{
   })
   id: number
 
-  @Column({
-    unique: true
-  })
+  @Column()
   userId: number
 
-  @Column({
-    unique: true
-  })
+  @Column()
   name: string
 
   @Column()

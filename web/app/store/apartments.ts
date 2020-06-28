@@ -19,7 +19,7 @@ export const actions: ActionTree<TicketModuleState, RootState> = {
   getApartments({ commit, dispatch }) {
     return ApartmentsApi.all()
       .then((res: any) => {
-        commit(SET_APARTMENTS, res.apartments)
+        commit(SET_APARTMENTS, res)
       })
       .catch((err: any) => {
         dispatch('alerts/alertError', 'Something went wrong', {

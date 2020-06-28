@@ -12,7 +12,25 @@ export const FIELDS = [
     tdClass: 'text-muted align-middle'
   },
   {
-    key: 'date',
+    key: 'description',
+    sortable: true,
+    thClass: 'text-info align-middle border-secondary',
+    tdClass: 'text-muted align-middle'
+  },
+  {
+    key: 'pricePerMonth',
+    sortable: true,
+    thClass: 'text-info align-middle border-secondary',
+    tdClass: 'text-muted align-middle'
+  },
+  {
+    key: 'numberOfRooms',
+    sortable: true,
+    thClass: 'text-info align-middle border-secondary',
+    tdClass: 'text-muted align-middle'
+  },
+  {
+    key: 'createdAt',
     sortable: true,
     thClass: 'text-info align-middle border-secondary',
     tdClass: 'text-muted align-middle'
