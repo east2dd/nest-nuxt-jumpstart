@@ -23,6 +23,8 @@ import { AuthService } from './auth.service'
 import { AuthTokenDto } from './dto/auth.token.dto'
 import { AuthLoginDto } from './dto/auth.login.dto'
 import { LocalAuthGuard } from './local-auth.guard'
+import AuthRegisterService from './service/auth.register.service';
+import { UserRepository } from '../user/user.repository';
 
 @ApiTags('Auth')
 @Controller()
@@ -44,7 +46,7 @@ export class AuthController {
       return this.authService.login(user)
     } catch (e) {
       throw new BadRequestException(e.message)
-    }    
+    }
   }
 
   @UseGuards(LocalAuthGuard)

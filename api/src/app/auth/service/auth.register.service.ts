@@ -21,10 +21,15 @@ export default class AuthRegisterService
 
     const { password, ...userParams } = params
     const passwordHash = await this.generatePasswordHash(password)
-
     const user = new User({ ...userParams, passwordHash: passwordHash })
+    
+    return await this.createUser(user)
+  }
 
-    return await this.userRepository.save(user)
+  protected async createUser(user: User): Promise<User> {
+    const result = await this.userRepository.save(user)
+
+    return result
   }
 
   protected async ensureUserNotExist(email: string) {
