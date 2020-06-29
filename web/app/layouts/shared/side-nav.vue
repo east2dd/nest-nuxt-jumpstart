@@ -15,12 +15,6 @@ export default {
         break
       }
     }
-  },
-  methods: {
-    logout() {
-      this.$auth.logout();
-      this.$router.push("/login");
-    }
   }
 }
 </script>
@@ -41,13 +35,6 @@ export default {
           <i class="fas fa-user"></i>
           <span>Users</span>
         </nuxt-link>
-      </li>
-
-      <li>
-        <a href="#" class="side-nav-link-ref" @click="logout">
-          <i class="fas fa-power-off"></i>
-          <span>Log Out</span>
-        </a>
       </li>
     </ul>
   </div>

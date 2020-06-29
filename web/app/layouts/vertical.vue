@@ -1,6 +1,6 @@
 <script>
-import NavBar from '~/components/nav-bar'
-import SideBar from '~/components/side-bar'
+import NavBar from './shared/nav-bar'
+import SideBar from './shared/side-bar'
 
 export default {
   components: { NavBar, SideBar },
