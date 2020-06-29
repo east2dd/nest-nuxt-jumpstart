@@ -1,6 +1,6 @@
 import { required, numeric } from 'vuelidate/lib/validators'
 
-export const VALIDATION_UPDATE_ITEM_OPTIONS = {
+export const UPDATE_ITEM_VALIDATIOS = {
   name: {
     required
   },

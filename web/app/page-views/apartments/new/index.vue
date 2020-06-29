@@ -2,7 +2,7 @@
 import Vue from 'vue'
 import { required, numeric } from 'vuelidate/lib/validators'
 import { Apartment } from '../shared/interfaces'
-import { VALIDATION_CREATE_ITEM_OPTIONS } from './constants';
+import { CREATE_ITEM_VALIDATIONS } from './constants';
 
 export default Vue.extend({
   data() {
@@ -12,7 +12,7 @@ export default Vue.extend({
     }
   },
   validations: {
-    item: VALIDATION_CREATE_ITEM_OPTIONS
+    item: CREATE_ITEM_VALIDATIONS
   },
   methods: {
     createApartment() {

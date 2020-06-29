@@ -2,7 +2,7 @@
 import Vue from 'vue'
 import { required, numeric } from 'vuelidate/lib/validators'
 import { Apartment } from '../shared/interfaces'
-import { VALIDATION_UPDATE_ITEM_OPTIONS } from './constants';
+import { UPDATE_ITEM_VALIDATIOS } from './constants';
 
 export default Vue.extend({
   data() {
@@ -11,7 +11,7 @@ export default Vue.extend({
     }
   },
   validations: {
-    item: VALIDATION_UPDATE_ITEM_OPTIONS
+    item: UPDATE_ITEM_VALIDATIOS
   },
   created() {
     this.fetchItem()

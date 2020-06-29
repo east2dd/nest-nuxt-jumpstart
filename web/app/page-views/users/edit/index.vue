@@ -41,13 +41,20 @@ export default Vue.extend({
     fetchItem() {
       this.$store.dispatch('users/getUser', this.$route.params.id)
     },
-    updateUser() {
+    updateItem() {
       this.submitted = true
       this.$v.$touch()
       if (this.$v.$invalid) return
 
       const data = { ...this.item }
       this.$store.dispatch('users/updateUser', data).then(() => {
+        this.openList()
+      })
+    },
+    deleteItem() {
+      if (!confirm("Do you want to delete this user?")) return
+
+      this.$store.dispatch('users/deleteUser', this.item.id).then(() => {
         this.openList()
       })
     },
@@ -64,14 +71,13 @@ export default Vue.extend({
       <div class="card">
         <div class="card-body">
           <div class="card-title mb-0">
-            <i class="far fa-play-circle fa-rotate-180 fa-lg"></i>
             <h2 class="d-inline-block text-warning align-middle mb-0 ml-2">
               EDIT USER
             </h2>
           </div>
         </div>
         <div class="card-body bg-light">
-          <b-form @submit.prevent="updateUser">
+          <b-form @submit.prevent="updateItem">
             <slot />
 
             <b-form-group
@@ -164,10 +170,22 @@ export default Vue.extend({
               </div>
             </b-form-group>
 
-            <div class="mt-4">
-              <b-button type="submit" variant="primary" class="btn-block col-md-2">
-                Submit
-              </b-button>
+            <div class="row mt-4">
+              <div class="col-md-3 col-lg-3 col-xl-2">
+                <b-button class="w-100" variant="secondary" @click="openList">
+                  Cancel
+                </b-button>
+              </div>
+              <div class="col-md-3 col-lg-3 col-xl-2 mt-2 mt-md-0">
+                <b-button type="submit" class="w-100" variant="warning">
+                  Submit
+                </b-button>
+              </div>
+              <div class="col-md-3 col-lg-3 col-xl-2 mt-2 mt-md-0">
+                <b-button class="w-100" variant="danger" @click="deleteItem">
+                  Delete
+                </b-button>
+              </div>
             </div>
           </b-form>
         </div>
