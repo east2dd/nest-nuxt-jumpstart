@@ -8,8 +8,8 @@ export default Vue.extend({
     return {
       fields: FIELDS,
       totalRows: 0,
-      perPage: 5,
-      pageOptions: [5, 10, 25, 50, 100],
+      perPage: 10,
+      pageOptions: [10, 25, 50, 100],
       currentPage: 1,
       sortBy: 'name',
       sortDesc: true
@@ -20,6 +20,8 @@ export default Vue.extend({
       return this.$store.state.apartments.items
     },
     tableData(): Apartment[] {
+      this.totalRows = this.items.length
+
       return this.items
     },
     pageCount(): number {

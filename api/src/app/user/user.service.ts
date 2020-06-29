@@ -13,6 +13,10 @@ export class UserService {
     private userRepository: Repository<User>,
   ) {}
 
+  all(): Promise<User[]> {
+    return this.userRepository.find()
+  }
+
   find(id: number): Promise<User> {
     return this.userRepository.findOne(id)
   }

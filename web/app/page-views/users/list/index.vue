@@ -1,25 +1,28 @@
 <script lang="ts">
 import Vue from 'vue'
 import { User } from './interfaces'
-import { FIELDS } from './constants'
+import { FIELDS, USER_ROLES } from './constants'
 
 export default Vue.extend({
   data() {
     return {
       fields: FIELDS,
       totalRows: 0,
-      perPage: 5,
-      pageOptions: [5, 10, 25, 50, 100],
+      perPage: 10,
+      pageOptions: [10, 25, 50, 100],
       currentPage: 1,
       sortBy: 'name',
-      sortDesc: true
+      sortDesc: true,
+      userRoles: USER_ROLES
     }
   },
   computed: {
     items(): User[] {
-      return this.$store.state.apartments.items
+      return this.$store.state.users.items
     },
     tableData(): User[] {
+      this.totalRows = this.items.length
+
       return this.items
     },
     pageCount(): number {
@@ -73,8 +76,8 @@ export default Vue.extend({
                 :sort-by.sync="sortBy"
                 :sort-desc.sync="sortDesc"
               >
-                <template v-slot:cell(subject)="row">
-                  {{ '#' + row.item.tid + ' - ' + row.value }}
+                <template v-slot:cell(role)="row">
+                  {{ userRoles[row.value] }}
                 </template>
 
                 <template v-slot:cell(actions)="row">

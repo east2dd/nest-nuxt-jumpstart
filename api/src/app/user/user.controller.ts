@@ -23,11 +23,18 @@ export class UserController {
   @Get('me')
   @ApiOperation({ description: 'Get user profile' })
   public async me(@Req() req: Request) {
-    return this.userService.find(req.user.id)
+    return await this.userService.find(req.user.id)
+  }
+
+  @Get('')
+  @ApiOperation({ description: 'Get user list' })
+  @UseGuards(new UserGuard('canRead'))
+  public async index(@Req() req: Request) {
+    return await this.userService.all()
   }
 
   @Post('')
-  @ApiOperation({ description: 'Create a user'})
+  @ApiOperation({ description: 'Create a user' })
   @UseGuards(new UserGuard('canCreate'))
   public async create(@Req() req: Request, @Body() params: CreateUserDto) {
     try {
@@ -38,7 +45,7 @@ export class UserController {
   }
 
   @Put(':userId')
-  @ApiOperation({ description: 'Update a user'})
+  @ApiOperation({ description: 'Update a user' })
   @UseGuards(new UserGuard('canUpdate'))
   public async update(
     @Req() req: Request,

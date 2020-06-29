@@ -67,14 +67,6 @@ export default Vue.extend({
             : "Sorry an error occured, check your internet"
         });
       }
-    },
-    setError(error: boolean, errorMessage: string) {
-      this.error = error
-      this.errorMessage = errorMessage
-    },
-    cleanError() {
-      this.error = false
-      this.errorMessage = ''
     }
   }
 })

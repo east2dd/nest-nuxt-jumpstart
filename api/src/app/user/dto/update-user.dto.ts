@@ -18,6 +18,10 @@ export class UpdateUserDto {
   @IsNotEmpty()
   public readonly lastName: string
 
+  @ApiProperty({
+    name: 'email',
+    description: 'Email of User',
+  })
   @IsString()
   @IsNotEmpty()
   public readonly email: string

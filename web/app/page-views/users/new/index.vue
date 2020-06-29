@@ -1,33 +1,54 @@
 <script lang="ts">
 import Vue from 'vue'
-import { required } from 'vuelidate/lib/validators'
+import { required, numeric, minLength, sameAs } from 'vuelidate/lib/validators'
 import { User } from './interfaces'
 
 export default Vue.extend({
   data() {
     return {
       item: {} as User,
-      submitted: false
+      submitted: false,
+      password: "",
+      passwordConfirmation: "",
+      roleOptions: [
+        { text: 'Client', value: 0 },
+        { text: 'Realtor', value: 1 },
+        { text: 'Admin', value: 2 },
+      ]
     }
   },
   validations: {
     item: {
-      name: {
+      email: {
+        required
+      },
+      firstName: {
+        required
+      },
+      lastName: {
+        required
+      },
+      role: {
         required
       }
+    },
+    password: {
+      required,
+      minLength: minLength(6)
+    },
+    passwordConfirmation: {
+      required,
+      sameAsPassword: sameAs('password')
     }
   },
   methods: {
-    createApartment() {
+    createUser() {
       this.submitted = true
       this.$v.$touch()
       if (this.$v.$invalid) return
 
-      const formData = new FormData(
-        this.$refs['create-user'] as HTMLFormElement | undefined
-      )
-
-      this.$store.dispatch('users/createUser', formData).then(() => {
+      const data = { ...this.item, password: this.password }
+      this.$store.dispatch('users/createUser', data).then(() => {
         this.openList()
       })
     },
@@ -51,44 +72,146 @@ export default Vue.extend({
           </div>
         </div>
         <div class="card-body bg-light">
-          <b-form ref="create-user" @submit.prevent="createUser">
-            <div class="row mt-2">
-              <div class="col-md-6">
-                <b-form-input
-                  id="name"
-                  v-model="item.name"
-                  name="name"
-                  type="text"
-                  placeholder="Enter name"
-                  :class="{
-                    'is-invalid': submitted && $v.item.name.$error
-                  }"
-                ></b-form-input>
+          <b-form @submit.prevent="createUser">
+            <slot />
+            <b-form-group
+              id="first-name-group"
+              label="First Name"
+              label-for="first-name"
+            >
+              <b-form-input
+                id="first-name"
+                v-model="item.firstName"
+                name="first-name"
+                type="text"
+                placeholder="Enter first name"
+                :class="{ 'is-invalid': submitted && $v.item.firstName.$error }"
+              ></b-form-input>
 
-                <div
-                  v-if="submitted && $v.item.name.$error"
-                  class="invalid-feedback"
-                >
-                  <span v-if="!$v.item.name.required">
-                    Required
-                  </span>
-                </div>
+              <div
+                v-if="submitted && $v.item.firstName.$error"
+                class="invalid-feedback"
+              >
+                <span v-if="!$v.item.firstName.required">
+                  This value is required.
+                </span>
               </div>
-            </div>
+            </b-form-group>
 
-            <hr class="my-4" />
+            <b-form-group
+              id="last-name-group"
+              label="Last Name"
+              label-for="last-name"
+            >
+              <b-form-input
+                id="last-name"
+                v-model="item.lastName"
+                name="last-name"
+                type="text"
+                placeholder="Enter last name"
+                :class="{ 'is-invalid': submitted && $v.item.lastName.$error }"
+              ></b-form-input>
 
-            <div class="row justify-content-end">
-              <div class="col-md-3 col-lg-3 col-xl-2">
-                <b-button class="w-100" variant="secondary" @click="openList">
-                  Cancel
-                </b-button>
+              <div
+                v-if="submitted && $v.item.lastName.$error"
+                class="invalid-feedback"
+              >
+                <span v-if="!$v.item.lastName.required">
+                  This value is required.
+                </span>
               </div>
-              <div class="col-md-3 col-lg-3 col-xl-2 mt-2 mt-md-0">
-                <b-button type="submit" class="w-100" variant="warning">
-                  Submit
-                </b-button>
+            </b-form-group>
+
+            <b-form-group
+              id="role-group"
+              label="Role"
+              label-for="role"
+            >
+              <b-form-select
+                v-model="item.role"
+                size="md"
+                :options="roleOptions"
+                :class="{ 'is-invalid': submitted && $v.item.role.$error }"
+              ></b-form-select>
+
+              <div
+                v-if="submitted && $v.item.role.$error"
+                class="invalid-feedback"
+              >
+                <span v-if="!$v.item.role.required">
+                  This value is required.
+                </span>
               </div>
+            </b-form-group>
+
+            <b-form-group id="email-group" label="Email" label-for="email">
+              <b-form-input
+                id="email"
+                v-model="item.email"
+                name="email"
+                type="email"
+                placeholder="Enter email"
+                :class="{ 'is-invalid': submitted && $v.item.email.$error }"
+              ></b-form-input>
+
+              <div v-if="submitted && $v.item.email.$error" class="invalid-feedback">
+                <span v-if="!$v.item.email.required">
+                  This value is required.
+                </span>
+                <span v-if="!$v.item.email.email">
+                  This value should be a valid email.
+                </span>
+              </div>
+            </b-form-group>
+
+            <b-form-group id="password-group" label="Password" label-for="password">
+              <b-form-input
+                id="password"
+                v-model="password"
+                name="password"
+                type="password"
+                placeholder="Enter password"
+                :class="{ 'is-invalid': submitted && $v.password.$error }"
+              ></b-form-input>
+
+              <div v-if="submitted && $v.password.$error" class="invalid-feedback">
+                <span v-if="!$v.password.required">
+                  This value is required.
+                </span>
+                <span v-if="!$v.password.minLength">
+                  This value must have at least
+                  {{ $v.password.$params.minLength.min }} letters.
+                </span>
+              </div>
+            </b-form-group>
+
+            <b-form-group label="Confirm Password" label-for="password-confirm">
+              <b-form-input
+                id="password-confirm"
+                v-model="passwordConfirmation"
+                name="password_confirmation"
+                type="password"
+                placeholder="Confirm password"
+                :class="{ 'is-invalid': submitted && $v.passwordConfirmation.$error }"
+              ></b-form-input>
+
+              <div
+                v-if="submitted && $v.passwordConfirmation.$error"
+                class="invalid-feedback"
+              >
+                <span v-if="!$v.passwordConfirmation.required">
+                  This value is required.
+                </span>
+                <span v-else-if="!$v.passwordConfirmation.sameAsPassword">
+                  This value should be same as password.
+                </span>
+              </div>
+            </b-form-group>
+
+            <div class="mt-4">
+              <b-button type="submit" variant="primary" class="btn-block col-md-2">
+                Submit
+              </b-button>
             </div>
           </b-form>
         </div>
@@ -96,6 +219,3 @@ export default Vue.extend({
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-</style>
