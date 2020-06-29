@@ -44,30 +44,44 @@ export class UserController {
     }    
   }
 
-  @Put(':userId')
-  @ApiOperation({ description: 'Update a user' })
+  @Get(':id')
+  @ApiOperation({ description: 'Get a user detail' })
   @UseGuards(new UserGuard('canUpdate'))
-  public async update(
+  public async show(
     @Req() req: Request,
-    @Param('userId') userId: number,
-    @Body() params: UpdateUserDto
+    @Param('id') id: number
   ) {
     try {
-      return await this.userService.update(userId, params)
+      return await this.userService.find(id)
     } catch (e) {
       throw new BadRequestException(e.message)
     }
   }
 
-  @Delete(':userId')
+  @Put(':id')
+  @ApiOperation({ description: 'Update a user' })
+  @UseGuards(new UserGuard('canUpdate'))
+  public async update(
+    @Req() req: Request,
+    @Param('id') id: number,
+    @Body() params: UpdateUserDto
+  ) {
+    try {
+      return await this.userService.update(id, params)
+    } catch (e) {
+      throw new BadRequestException(e.message)
+    }
+  }
+
+  @Delete(':id')
   @ApiOperation({ description: 'Delete a user'})
   @UseGuards(new UserGuard('canDelete'))
   public async destroy(
     @Req() req: Request,
-    @Param('userId') userId: number
+    @Param('id') id: number
   ) {
     try {
-      return await this.userService.destroy(userId)
+      return await this.userService.destroy(id)
     } catch (e) {
       throw new BadRequestException(e.message)
     }    

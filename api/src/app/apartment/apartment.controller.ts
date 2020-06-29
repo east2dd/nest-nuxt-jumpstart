@@ -46,6 +46,20 @@ export class ApartmentController {
     }    
   }
 
+  @Get(':id')
+  @ApiOperation({ description: 'Get a apartment detail'})
+  @UseGuards(new ApartmentGuard('canUpdate'))
+  public async show(
+    @Req() req: Request,
+    @Param('id') id: number
+  ) {
+    try {
+      return await this.userService.find(id)
+    } catch (e) {
+      throw new BadRequestException(e.message)
+    }    
+  }
+
   @Put(':id')
   @ApiOperation({ description: 'Update a apartment'})
   @UseGuards(new ApartmentGuard('canUpdate'))
