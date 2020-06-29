@@ -35,6 +35,8 @@ export default {
     <SideBar :is-condensed="isMenuCondensed" />
     <div class="main-content">
       <div class="page-content">
+        <notifications group="main" position="bottom right" />
+
         <div class="container-fluid">
           <slot />
         </div>

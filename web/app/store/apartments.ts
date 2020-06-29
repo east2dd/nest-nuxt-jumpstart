@@ -2,6 +2,7 @@ import { ActionTree, MutationTree } from 'vuex'
 import { RootState } from '~/store'
 import { SET_APARTMENT, SET_APARTMENTS } from '~/store/constants'
 import * as ApartmentsApi from '~/plugins/apis/apartments'
+import { alertSuccess, alertError } from './helper';
 
 export const state = () => ({
   items: [] as any,
@@ -22,9 +23,8 @@ export const actions: ActionTree<TicketModuleState, RootState> = {
         commit(SET_APARTMENTS, res)
       })
       .catch((err: any) => {
-        dispatch('alerts/alertError', 'Something went wrong', {
-          root: true
-        })
+        alertError('Something went wrong')
+
         throw err
       })
   },
@@ -34,51 +34,41 @@ export const actions: ActionTree<TicketModuleState, RootState> = {
         commit(SET_APARTMENT, item)
       })
       .catch((err: any) => {
-        dispatch('alerts/alertError', 'Something went wrong', {
-          root: true
-        })
+        alertError('Something went wrong')
+
         throw err
       })
   },
   createApartment({ dispatch }, params) {
     return ApartmentsApi.create(params)
       .then(() => {
-        dispatch('alerts/alertSuccess', 'Created Successfully', {
-          root: true
-        })
+        alertSuccess('Created Successfully')
       })
       .catch((err: any) => {
-        dispatch('alerts/alertError', 'Something went wrong', {
-          root: true
-        })
+        alertError('Something went wrong')
+
         throw err
       })
   },
   updateApartment({ dispatch }, params) {
     return ApartmentsApi.update(params.id, params)
       .then(() => {
-        dispatch('alerts/alertSuccess', 'Updated Successfully', {
-          root: true
-        })
+        alertSuccess('Updated Successfully')
       })
       .catch((err: any) => {
-        dispatch('alerts/alertError', 'Something went wrong', {
-          root: true
-        })
+        alertError('Something went wrong')
+
         throw err
       })
   },
   deleteApartment({ dispatch }, id) {
     return ApartmentsApi.destroy(id)
       .then(() => {
-        dispatch('alerts/alertSuccess', 'Deleted Successfully', {
-          root: true
-        })
+        alertSuccess('Deleted Successfully')
       })
       .catch((err: any) => {
-        dispatch('alerts/alertError', 'Something went wrong', {
-          root: true
-        })
+        alertError('Something went wrong')
+
         throw err
       })
   }

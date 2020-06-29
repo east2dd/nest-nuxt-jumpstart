@@ -35,7 +35,9 @@ export default Vue.extend({
       if (this.$v.$invalid) return
 
       const data = { ...this.item }
-      this.$store.dispatch('users/updateUser', data)
+      this.$store.dispatch('users/updateUser', data).then(() => {
+        this.openList()
+      })
     },
     deleteItem() {
       if (!confirm("Do you want to delete this user?")) return

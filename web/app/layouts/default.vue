@@ -1,11 +1,9 @@
 <script>
 import Vertical from './vertical'
-import Alert from '~/components/alert'
 
 export default {
   components: {
-    Vertical,
-    Alert
+    Vertical
   }
 }
 </script>
@@ -13,8 +11,18 @@ export default {
 <template>
   <div>
     <Vertical>
-      <Alert />
+      <transition name="fade">
       <nuxt />
+      </transition>
     </Vertical>
   </div>
 </template>
+
+<style scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+</style>

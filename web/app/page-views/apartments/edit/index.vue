@@ -30,7 +30,9 @@ export default Vue.extend({
       this.$v.$touch()
       if (this.$v.$invalid) return
 
-      this.$store.dispatch('apartments/updateApartment', this.item)
+      this.$store.dispatch('apartments/updateApartment', this.item).then(() => {
+        this.openList()
+      })
     },
     deleteItem() {
       if (!confirm("Do you want to delete this item?")) return

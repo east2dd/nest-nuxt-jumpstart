@@ -7,8 +7,6 @@ export default Vue.extend({
   data() {
     return {
       user: {} as User,
-      error: false,
-      errorMessage: '',
       submitted: false
     }
   },
@@ -25,24 +23,18 @@ export default Vue.extend({
   },
   methods: {
     logIn() {
-      this.cleanError()
       this.submitted = true
       this.$v.$touch()
       if (this.$v.$invalid) return
 
-      try {
-        this.$auth.loginWith('local', { data: this.user })
-      } catch (err) {
-        this.setError()
-      }
-    },
-    setError() {
-      this.error = true
-      this.errorMessage = 'User sign in is failed'
-    },
-    cleanError() {
-      this.error = false
-      this.errorMessage = ''
+      this.$auth.loginWith('local', { data: this.user })
+        .catch(()=>{
+          this.$notify({
+            group: 'main',
+            type: 'warn',
+            text: 'Email and password does not match'
+          })
+        })
     }
   }
 })
@@ -50,10 +42,6 @@ export default Vue.extend({
 
 <template>
   <div>
-    <b-alert v-model="error" variant="danger" class="mt-3" dismissible>{{
-      errorMessage
-    }}</b-alert>
-
     <b-form @submit.prevent="logIn">
       <slot />
       <b-form-group id="email-group" label="Email" label-for="email">

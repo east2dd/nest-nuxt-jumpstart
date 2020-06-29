@@ -13,6 +13,8 @@ export default {
     <div id="layout-wrapper">
       <div class="main-content">
         <div class="page-content">
+          <notifications group="main" position="bottom right"/>
+
           <div class="container-fluid">
             <nuxt />
           </div>

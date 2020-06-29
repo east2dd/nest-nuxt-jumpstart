@@ -2,6 +2,7 @@ import { ActionTree, MutationTree } from 'vuex'
 import { RootState } from '~/store'
 import { SET_USER, SET_USERS } from '~/store/constants'
 import * as UsersApi from '~/plugins/apis/users'
+import { alertError, alertSuccess } from './helper';
 
 export const state = () => ({
   items: [] as any,
@@ -22,9 +23,7 @@ export const actions: ActionTree<TicketModuleState, RootState> = {
         commit(SET_USERS, res)
       })
       .catch((err: any) => {
-        dispatch('alerts/alertError', 'Something went wrong', {
-          root: true
-        })
+        alertError('Something went wrong')
         throw err
       })
   },
@@ -34,51 +33,37 @@ export const actions: ActionTree<TicketModuleState, RootState> = {
         commit(SET_USER, item)
       })
       .catch((err: any) => {
-        dispatch('alerts/alertError', 'Something went wrong', {
-          root: true
-        })
+        alertError('Something went wrong')
         throw err
       })
   },
   createUser({ dispatch }, params) {
     return UsersApi.create(params)
       .then(() => {
-        dispatch('alerts/alertSuccess', 'Created Successfully', {
-          root: true
-        })
+        alertSuccess('Created Successfully')
       })
       .catch((err: any) => {
-        dispatch('alerts/alertError', 'Something went wrong', {
-          root: true
-        })
+        alertError('Something went wrong')
         throw err
       })
   },
   updateUser({ dispatch }, params) {
     return UsersApi.update(params.id, params)
       .then(() => {
-        dispatch('alerts/alertSuccess', 'Updated Successfully', {
-          root: true
-        })
+        alertSuccess('Updated Successfully')
       })
       .catch((err: any) => {
-        dispatch('alerts/alertError', 'Something went wrong', {
-          root: true
-        })
+        alertError('Something went wrong')
         throw err
       })
   },
   deleteUser({ dispatch }, id) {
     return UsersApi.destroy(id)
       .then(() => {
-        dispatch('alerts/alertSuccess', 'Deleted Successfully', {
-          root: true
-        })
+        alertSuccess('Deleted Successfully')
       })
       .catch((err: any) => {
-        dispatch('alerts/alertError', 'Something went wrong', {
-          root: true
-        })
+        alertError('Something went wrong')
         throw err
       })
   }
