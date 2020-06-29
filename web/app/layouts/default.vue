@@ -6,16 +6,7 @@ export default {
   components: {
     Vertical,
     Alert
-  },
-  data() {
-    return {}
-  },
-  computed: {
-    layoutType() {
-      return this.$root.layoutType
-    }
-  },
-  methods: {}
+  }
 }
 </script>
 

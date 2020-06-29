@@ -30,9 +30,7 @@ export default Vue.extend({
       this.$v.$touch()
       if (this.$v.$invalid) return
 
-      this.$store.dispatch('apartments/updateApartment', this.item).then(() => {
-        this.openList()
-      })
+      this.$store.dispatch('apartments/updateApartment', this.item)
     },
     deleteItem() {
       if (!confirm("Do you want to delete this item?")) return
@@ -218,7 +216,7 @@ export default Vue.extend({
             <div class="row">
               <div class="col-md-3 col-lg-3 col-xl-2">
                 <b-button class="w-100" variant="secondary" @click="openList">
-                  Cancel
+                  Back
                 </b-button>
               </div>
               <div class="col-md-3 col-lg-3 col-xl-2 mt-2 mt-md-0">

@@ -3,6 +3,7 @@ import Vue from 'vue'
 import { required, numeric, minLength, sameAs } from 'vuelidate/lib/validators'
 import { User } from '../shared/interfaces'
 import { USER_ROLE_OPTIONS } from '../shared/constants'
+import { UPDATE_ITEM_VALIDATIONS } from './constants';
 
 export default Vue.extend({
   data() {
@@ -14,20 +15,7 @@ export default Vue.extend({
     }
   },
   validations: {
-    item: {
-      email: {
-        required
-      },
-      firstName: {
-        required
-      },
-      lastName: {
-        required
-      },
-      role: {
-        required
-      }
-    }
+    item: UPDATE_ITEM_VALIDATIONS
   },
   created() {
     this.fetchItem()
@@ -47,9 +35,7 @@ export default Vue.extend({
       if (this.$v.$invalid) return
 
       const data = { ...this.item }
-      this.$store.dispatch('users/updateUser', data).then(() => {
-        this.openList()
-      })
+      this.$store.dispatch('users/updateUser', data)
     },
     deleteItem() {
       if (!confirm("Do you want to delete this user?")) return
@@ -173,7 +159,7 @@ export default Vue.extend({
             <div class="row mt-4">
               <div class="col-md-3 col-lg-3 col-xl-2">
                 <b-button class="w-100" variant="secondary" @click="openList">
-                  Cancel
+                  Back
                 </b-button>
               </div>
               <div class="col-md-3 col-lg-3 col-xl-2 mt-2 mt-md-0">

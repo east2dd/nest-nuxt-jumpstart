@@ -11,6 +11,7 @@ import Vue from 'vue'
 import Page from '../../page-views/users/list/index.vue'
 
 export default Vue.extend({
+  layout: 'default',
   components: {
     Page
   }

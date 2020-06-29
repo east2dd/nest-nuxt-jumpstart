@@ -3,7 +3,7 @@ import {
   REGISTER_URL,
 } from './constants'
 import { LoginDto, RegisterDto } from './dto'
-import { apiUrl } from '~/helpers/api'
+import { apiUrl } from '~/plugins/apis/helper'
 
 export * from './interfaces'
 

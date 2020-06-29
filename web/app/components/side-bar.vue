@@ -1,6 +1,5 @@
 <script>
 import simplebar from 'simplebar-vue'
-
 import SideNav from './side-nav'
 
 export default {

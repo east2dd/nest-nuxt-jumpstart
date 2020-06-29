@@ -90,6 +90,7 @@ export default {
    ** Router configuration
    */
   router: {
+    mode: 'history',
     middleware: 'auth'
   },
   /*

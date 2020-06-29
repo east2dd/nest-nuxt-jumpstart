@@ -17,8 +17,13 @@ export default {
             <nuxt />
           </div>
         </div>
-        <Footer />
       </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+.main-content{
+  margin-left: 0!important;
+}
+</style>

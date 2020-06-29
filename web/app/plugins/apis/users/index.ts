@@ -3,7 +3,7 @@ import {
   USER_URL,
 } from './constants'
 import { CreateUserDto } from './dto'
-import { apiUrl } from '~/helpers/api'
+import { apiUrl } from '~/plugins/apis/helper'
 import { UpdateUserDto } from './dto/update-user.dto';
 
 export * from './interfaces'

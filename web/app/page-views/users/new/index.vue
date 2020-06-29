@@ -2,6 +2,7 @@
 import Vue from 'vue'
 import { required, numeric, minLength, sameAs } from 'vuelidate/lib/validators'
 import { User } from '../shared/interfaces'
+import { CREATE_ITEM_VALIDATIONS } from './constants'
 
 export default Vue.extend({
   data() {
@@ -18,20 +19,7 @@ export default Vue.extend({
     }
   },
   validations: {
-    item: {
-      email: {
-        required
-      },
-      firstName: {
-        required
-      },
-      lastName: {
-        required
-      },
-      role: {
-        required
-      }
-    },
+    item: CREATE_ITEM_VALIDATIONS,
     password: {
       required,
       minLength: minLength(6)
@@ -65,7 +53,6 @@ export default Vue.extend({
       <div class="card">
         <div class="card-body">
           <div class="card-title mb-0">
-            <i class="far fa-play-circle fa-rotate-180 fa-lg"></i>
             <h2 class="d-inline-block text-warning align-middle mb-0 ml-2">
               NEW USER
             </h2>
@@ -208,10 +195,17 @@ export default Vue.extend({
               </div>
             </b-form-group>
 
-            <div class="mt-4">
-              <b-button type="submit" variant="primary" class="btn-block col-md-2">
-                Submit
-              </b-button>
+            <div class="row">
+              <div class="col-md-3 col-lg-3 col-xl-2">
+                <b-button class="w-100" variant="secondary" @click="openList">
+                  Back
+                </b-button>
+              </div>
+              <div class="col-md-3 col-lg-3 col-xl-2 mt-2 mt-md-0">
+                <b-button type="submit" class="w-100" variant="warning">
+                  Submit
+                </b-button>
+              </div>
             </div>
           </b-form>
         </div>

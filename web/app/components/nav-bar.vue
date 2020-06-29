@@ -2,9 +2,7 @@
 import Vue from 'vue'
 import simplebar from 'simplebar-vue'
 import { mapState } from "vuex";
-/**
- * Nav-bar Component
- */
+
 export default Vue.extend({
   components: { simplebar },
   computed: {
@@ -25,10 +23,9 @@ export default Vue.extend({
   <header id="page-topbar">
     <div class="navbar-header">
       <div class="d-flex">
-        <!-- LOGO -->
         <div class="navbar-brand-box">
-          <a href="/" class="logo logo-dark">
-            NUXT JUMPSTART
+          <a href="/" class="logo">
+            TEST
           </a>
         </div>
 

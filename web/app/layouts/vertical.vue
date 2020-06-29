@@ -32,7 +32,7 @@ export default {
 <template>
   <div id="layout-wrapper">
     <NavBar />
-    <SideBar />
+    <SideBar :is-condensed="isMenuCondensed" />
     <div class="main-content">
       <div class="page-content">
         <div class="container-fluid">

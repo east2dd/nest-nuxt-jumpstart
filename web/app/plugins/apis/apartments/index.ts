@@ -3,7 +3,7 @@ import {
   APARTMENT_URL,
 } from './constants'
 import { CreateApartmentDto } from './dto'
-import { apiUrl } from '~/helpers/api'
+import { apiUrl } from '~/plugins/apis/helper'
 import { UpdateApartmentDto } from './dto/update-apartment.dto';
 
 export * from './interfaces'
