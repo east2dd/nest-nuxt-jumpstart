@@ -12,7 +12,7 @@ describe('JWT strategy', () => {
       sub: '00179238-a8b1-4ad3-abd7-bd2791e0cd3d',
       email: 'test@gmail.com',
     }
-    return expect(jwtStrategy.validate(payLoad)).resolves.toStrictEqual({
+    return expect(jwtStrategy.validate(payLoad)).resolves.toEqual({
       id: payLoad.sub,
       email: payLoad.email,
     })
@@ -22,7 +22,7 @@ describe('JWT strategy', () => {
     const payLoad = {
       email: 'test@gmail.com',
     }
-    return expect(jwtStrategy.validate(payLoad)).resolves.toStrictEqual({
+    return expect(jwtStrategy.validate(payLoad)).resolves.toEqual({
       id: undefined,
       email: payLoad.email,
     })
@@ -32,7 +32,7 @@ describe('JWT strategy', () => {
     const payLoad = {
       sub: '00179238-a8b1-4ad3-abd7-bd2791e0cd3d',
     }
-    return expect(jwtStrategy.validate(payLoad)).resolves.toStrictEqual({
+    return expect(jwtStrategy.validate(payLoad)).resolves.toEqual({
       id: payLoad.sub,
       email: undefined,
     })
@@ -40,7 +40,7 @@ describe('JWT strategy', () => {
 
   it('should return both undefined when payload is empty', () => {
     const payLoad = {}
-    return expect(jwtStrategy.validate(payLoad)).resolves.toStrictEqual({
+    return expect(jwtStrategy.validate(payLoad)).resolves.toEqual({
       id: undefined,
       email: undefined,
     })

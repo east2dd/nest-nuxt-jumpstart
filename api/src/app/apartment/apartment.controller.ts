@@ -9,6 +9,7 @@ import { ApartmentService } from './apartment.service'
 import { JwtAuthGuard } from '../auth/jwt-auth.guard'
 import { CreateApartmentDto } from './dto/create-apartment.dto';
 import { UpdateApartmentDto } from './dto/update-apartment.dto';
+import { ApartmentGuard } from './apartment.guard';
 
 @ApiBearerAuth()
 @ApiTags('Apartment')
@@ -21,6 +22,7 @@ export class ApartmentController {
 
   @Get('')
   @ApiOperation({ description: 'Get apartment list'})
+  @UseGuards(new ApartmentGuard('canRead'))
   public async index(@Req() req: Request) {
     try {
       return await this.userService.all()
@@ -31,6 +33,7 @@ export class ApartmentController {
 
   @Post('')
   @ApiOperation({ description: 'Create a apartment'})
+  @UseGuards(new ApartmentGuard('canCreate'))
   public async create(@Req() req: Request, @Body() params: CreateApartmentDto) {
     try {
       Object.assign(params, { userId: req.user.id })
@@ -45,6 +48,7 @@ export class ApartmentController {
 
   @Put(':id')
   @ApiOperation({ description: 'Update a apartment'})
+  @UseGuards(new ApartmentGuard('canUpdate'))
   public async update(
     @Req() req: Request,
     @Param('id') id: number,
@@ -59,6 +63,7 @@ export class ApartmentController {
 
   @Delete(':id')
   @ApiOperation({ description: 'Delete a apartment'})
+  @UseGuards(new ApartmentGuard('canDelete'))
   public async destroy(
     @Req() req: Request,
     @Param('id') id: number
