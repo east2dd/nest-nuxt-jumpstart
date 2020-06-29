@@ -1,4 +1,5 @@
 export interface Apartment {
+  id: number
   name: string
   description: string
   floorAreaSize: number

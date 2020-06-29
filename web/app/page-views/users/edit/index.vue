@@ -34,14 +34,12 @@ export default Vue.extend({
   },
   computed: {
     item(): User {
-      return this.$store.state.users.item
+      return Object.assign({}, this.$store.state.users.item)
     }
   },
   methods: {
     fetchItem() {
-      this.$store.dispatch('users/getUser', this.$route.params.id).then(() => {
-        this.openList()
-      })
+      this.$store.dispatch('users/getUser', this.$route.params.id)
     },
     updateUser() {
       this.submitted = true
@@ -75,6 +73,7 @@ export default Vue.extend({
         <div class="card-body bg-light">
           <b-form @submit.prevent="updateUser">
             <slot />
+
             <b-form-group
               id="first-name-group"
               label="First Name"

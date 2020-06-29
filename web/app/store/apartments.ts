@@ -54,6 +54,20 @@ export const actions: ActionTree<TicketModuleState, RootState> = {
         throw err
       })
   },
+  updateApartment({ dispatch }, params) {
+    return ApartmentsApi.update(params.id, params)
+      .then(() => {
+        dispatch('alerts/alertSuccess', 'Updated Successfully', {
+          root: true
+        })
+      })
+      .catch((err: any) => {
+        dispatch('alerts/alertError', 'Something went wrong', {
+          root: true
+        })
+        throw err
+      })
+  },
   deleteApartment({ dispatch }, id) {
     return ApartmentsApi.destroy(id)
       .then(() => {

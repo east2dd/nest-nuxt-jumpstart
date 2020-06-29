@@ -2,6 +2,7 @@
 import Vue from 'vue'
 import { required, numeric } from 'vuelidate/lib/validators'
 import { Apartment } from '../shared/interfaces'
+import { VALIDATION_UPDATE_ITEM_OPTIONS } from './constants';
 
 export default Vue.extend({
   data() {
@@ -10,45 +11,19 @@ export default Vue.extend({
     }
   },
   validations: {
-    item: {
-      name: {
-        required
-      },
-      floorAreaSize: {
-        required,
-        numeric
-      },
-      numberOfRooms: {
-        required,
-        numeric
-      },
-      pricePerMonth: {
-        required,
-        numeric
-      },
-      latitude: {
-        required,
-        numeric
-      },
-      longitude: {
-        required,
-        numeric
-      },
-    }
+    item: VALIDATION_UPDATE_ITEM_OPTIONS
   },
   created() {
     this.fetchItem()
   },
   computed: {
     item(): Apartment {
-      return this.$store.state.apartments.item
+      return Object.assign({}, this.$store.state.apartments.item)
     }
   },
   methods: {
     fetchItem() {
-      this.$store.dispatch('apartments/getApartment', this.$route.params.id).then(() => {
-        this.openList()
-      })
+      this.$store.dispatch('apartments/getApartment', this.$route.params.id)
     },
     updateApartment() {
       this.submitted = true
@@ -59,8 +34,10 @@ export default Vue.extend({
         this.openList()
       })
     },
-    deleteItem(id: number) {
-      this.$store.dispatch('apartments/deleteApartment', id).then(() => {
+    deleteItem() {
+      if (!confirm("Do you want to delete this item?")) return
+
+      this.$store.dispatch('apartments/deleteApartment', this.item.id).then(() => {
         this.openList()
       })
     },
@@ -247,6 +224,11 @@ export default Vue.extend({
               <div class="col-md-3 col-lg-3 col-xl-2 mt-2 mt-md-0">
                 <b-button type="submit" class="w-100" variant="warning">
                   Submit
+                </b-button>
+              </div>
+              <div class="col-md-3 col-lg-3 col-xl-2 mt-2 mt-md-0">
+                <b-button class="w-100" variant="danger" @click="deleteItem">
+                  Delete
                 </b-button>
               </div>
             </div>

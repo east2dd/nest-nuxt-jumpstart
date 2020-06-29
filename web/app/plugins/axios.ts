@@ -1,6 +1,5 @@
 export default function({ $axios, store }: any) {
   $axios.onRequest((config: any) => {
-    store.dispatch('alerts/setAlert', { status: '', message: '' })
     store._vm.$nextTick(() => {
       if (!store._vm.$nuxt) return config
 

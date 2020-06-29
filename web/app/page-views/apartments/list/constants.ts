@@ -18,6 +18,12 @@ export const FIELDS = [
     tdClass: 'text-muted align-middle'
   },
   {
+    key: 'floorAreaSize',
+    sortable: true,
+    thClass: 'text-info align-middle border-secondary',
+    tdClass: 'text-muted align-middle'
+  },
+  {
     key: 'pricePerMonth',
     sortable: true,
     thClass: 'text-info align-middle border-secondary',

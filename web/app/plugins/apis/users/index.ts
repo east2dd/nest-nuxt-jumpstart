@@ -4,6 +4,7 @@ import {
 } from './constants'
 import { CreateUserDto } from './dto'
 import { apiUrl } from '~/helpers/api'
+import { UpdateUserDto } from './dto/update-user.dto';
 
 export * from './interfaces'
 
@@ -21,6 +22,10 @@ export const create = (params: CreateUserDto) => {
   return $axios.$post(apiUrl(USERS_URL), params, {})
 }
 
+export const update = (id: string, params: UpdateUserDto): Promise<any> => {
+  return $axios.$put(apiUrl(USER_URL, { id }), params, {})
+}
+
 export const destroy = (id: string): Promise<any> => {
-  return $axios.$put(apiUrl(USER_URL, { id }))
+  return $axios.$delete(apiUrl(USER_URL, { id }))
 }

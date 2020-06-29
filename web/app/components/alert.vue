@@ -12,6 +12,13 @@ export default Vue.extend({
     message() {
       return this.$store.state.alerts.message
     }
+  },
+  watch: {
+    message (newMessage, oldMessage) {
+      setTimeout(()=>{
+        this.$store.dispatch('alerts/setAlert', { status: '', message: '' })
+      }, 3000)
+    }
   }
 })
 </script>
