@@ -21,4 +21,7 @@ export class User extends BaseEntity{
 
   @Column({ length: 100, nullable: true })
   passwordHash: string
+
+  @Column({ default: 0 })
+  role: number
 }
