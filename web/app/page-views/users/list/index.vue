@@ -1,7 +1,8 @@
 <script lang="ts">
 import Vue from 'vue'
-import { User } from './interfaces'
-import { FIELDS, USER_ROLES } from './constants'
+import { User } from '../shared/interfaces'
+import { USER_ROLES } from '../shared/constants';
+import { FIELDS } from './constants'
 
 export default Vue.extend({
   data() {
@@ -39,8 +40,8 @@ export default Vue.extend({
     openNewPage() {
       this.$router.push(`/users/new`)
     },
-    openShowPage(id: string) {
-      this.$router.push(`/users/${id}`)
+    openEditPage(id: string) {
+      this.$router.push(`/users/${id}/edit`)
     }
   }
 })
@@ -84,9 +85,9 @@ export default Vue.extend({
                   <b-button
                     size="sm"
                     class="btn-info text-nowrap mr-1"
-                    @click="openShowPage(row.item.id)"
+                    @click="openEditPage(row.item.id)"
                   >
-                    View
+                    Edit
                   </b-button>
                 </template>
               </b-table>

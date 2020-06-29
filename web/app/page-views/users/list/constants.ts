@@ -34,7 +34,12 @@ export const FIELDS = [
     sortable: true,
     thClass: 'text-info align-middle border-secondary',
     tdClass: 'font-weight-bold align-middle'
+  },
+  {
+    key: 'actions',
+    label: '',
+    thClass: 'text-info align-middle border-secondary',
+    tdClass: 'align-middle'
   }
 ]
 
-export const USER_ROLES = [ 'Client', 'Realtor', 'Admin' ]

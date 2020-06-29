@@ -1,7 +1,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { required, numeric, minLength, sameAs } from 'vuelidate/lib/validators'
-import { User } from './interfaces'
+import { User } from '../shared/interfaces'
 
 export default Vue.extend({
   data() {
