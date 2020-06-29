@@ -1,10 +1,9 @@
 <script>
 import NavBar from '~/components/nav-bar'
 import SideBar from '~/components/side-bar'
-import Footer from '~/components/footer'
 
 export default {
-  components: { NavBar, SideBar, Footer },
+  components: { NavBar, SideBar },
   data() {
     return {
       isMenuCondensed: false
@@ -41,7 +40,6 @@ export default {
           <slot />
         </div>
       </div>
-      <Footer />
     </div>
   </div>
 </template>
