@@ -13,7 +13,7 @@ export class ApartmentService {
   ) {}
 
   all(): Promise<Apartment[]> {
-    return this.apartmentRepository.find()
+    return this.apartmentRepository.find({relations: ["user"]})
   }
 
   find(id: number): Promise<Apartment> {

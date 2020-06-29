@@ -1,5 +1,6 @@
-import { Entity, Column } from 'typeorm'
+import { Entity, Column, OneToMany, JoinColumn, ManyToOne } from 'typeorm'
 import { BaseEntity } from '../../common/base-entity'
+import { User } from '../user/user.entity';
 
 @Entity({ name: "apartments" })
 export class Apartment extends BaseEntity{
@@ -34,4 +35,8 @@ export class Apartment extends BaseEntity{
 
   @Column({ type: 'float' })
   latitude: number
+
+  @ManyToOne(type => User, user => user.apartments)
+  @JoinColumn({ name: 'user_id' })
+  user: User
 }
