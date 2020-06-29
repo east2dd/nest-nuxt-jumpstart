@@ -36,6 +36,11 @@ export const FIELDS = [
     tdClass: 'text-muted align-middle'
   },
   {
+    key: 'user',
+    thClass: 'text-info align-middle border-secondary',
+    tdClass: 'align-middle'
+  },
+  {
     key: 'createdAt',
     sortable: true,
     thClass: 'text-info align-middle border-secondary',

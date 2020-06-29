@@ -84,6 +84,10 @@ export default Vue.extend({
                     Edit
                   </b-button>
                 </template>
+
+                <template v-slot:cell(user)="row">
+                  {{ row.item.user.firstName }} {{ row.item.user.lastName }}
+                </template>
               </b-table>
             </div>
             <div class="row">
