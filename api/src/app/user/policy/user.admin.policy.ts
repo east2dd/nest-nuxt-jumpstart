@@ -1,8 +1,9 @@
 import { BasePolicy } from '../../../common/base-policy';
 
-export class ApartmentUserPolicy extends BasePolicy {
+export class UserAdminPolicy extends BasePolicy {
+
   public canCreate(): boolean {
-    return false
+    return true
   }
 
   public canRead(): boolean {
@@ -10,10 +11,10 @@ export class ApartmentUserPolicy extends BasePolicy {
   }
 
   public canUpdate(): boolean {
-    return false
+    return true
   }
 
   public canDelete(): boolean {
-    return false
+    return true
   }
 }

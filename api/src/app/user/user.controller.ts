@@ -9,6 +9,7 @@ import { UserService } from './user.service'
 import { JwtAuthGuard } from '../auth/jwt-auth.guard'
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { UserGuard } from './user.guard';
 
 @ApiBearerAuth()
 @ApiTags('User')
@@ -27,6 +28,7 @@ export class UserController {
 
   @Post('')
   @ApiOperation({ description: 'Create a user'})
+  @UseGuards(new UserGuard('canCreate'))
   public async create(@Req() req: Request, @Body() params: CreateUserDto) {
     try {
       return await this.userService.create(params)
@@ -37,6 +39,7 @@ export class UserController {
 
   @Put(':userId')
   @ApiOperation({ description: 'Update a user'})
+  @UseGuards(new UserGuard('canUpdate'))
   public async update(
     @Req() req: Request,
     @Param('userId') userId: number,
@@ -51,6 +54,7 @@ export class UserController {
 
   @Delete(':userId')
   @ApiOperation({ description: 'Delete a user'})
+  @UseGuards(new UserGuard('canDelete'))
   public async destroy(
     @Req() req: Request,
     @Param('userId') userId: number
