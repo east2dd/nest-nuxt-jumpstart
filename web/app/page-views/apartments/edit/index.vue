@@ -6,7 +6,6 @@ import { Apartment } from '../shared/interfaces'
 export default Vue.extend({
   data() {
     return {
-      item: {} as Apartment,
       submitted: false
     }
   },
@@ -37,13 +36,31 @@ export default Vue.extend({
       },
     }
   },
+  created() {
+    this.fetchItem()
+  },
+  computed: {
+    item(): Apartment {
+      return this.$store.state.apartments.item
+    }
+  },
   methods: {
-    createApartment() {
+    fetchItem() {
+      this.$store.dispatch('apartments/getApartment', this.$route.params.id).then(() => {
+        this.openList()
+      })
+    },
+    updateApartment() {
       this.submitted = true
       this.$v.$touch()
       if (this.$v.$invalid) return
 
-      this.$store.dispatch('apartments/createApartment', this.item).then(() => {
+      this.$store.dispatch('apartments/updateApartment', this.item).then(() => {
+        this.openList()
+      })
+    },
+    deleteItem(id: number) {
+      this.$store.dispatch('apartments/deleteApartment', id).then(() => {
         this.openList()
       })
     },
@@ -61,12 +78,12 @@ export default Vue.extend({
         <div class="card-body">
           <div class="card-title mb-0">
             <h2 class="d-inline-block text-warning align-middle mb-0 ml-2">
-              NEW APARTMENT
+              EDIT APARTMENT
             </h2>
           </div>
         </div>
         <div class="card-body bg-light">
-          <b-form ref="create-apartment" @submit.prevent="createApartment">
+          <b-form ref="create-apartment" @submit.prevent="updateApartment">
             <div class="row mt-2">
               <div class="col-md-6">
                 <b-form-input

@@ -1,6 +1,6 @@
 <script lang="ts">
 import Vue from 'vue'
-import { Apartment } from './interfaces'
+import { Apartment } from '../shared/interfaces'
 import { FIELDS } from './constants'
 
 export default Vue.extend({
@@ -35,13 +35,8 @@ export default Vue.extend({
     fetchList() {
       return this.$store.dispatch('apartments/getApartments')
     },
-    deleteItem(id: number) {
-      this.$store.dispatch('apartments/deleteApartment', id).then(() => {
-        this.fetchList()
-      })
-    },
-    openShowPage(id: string) {
-      this.$router.push(`/apartments/${id}`)
+    openEditPage(id: string) {
+      this.$router.push(`/apartments/${id}/edit`)
     },
     openNewPage() {
       this.$router.push(`/apartments/new`)
@@ -80,24 +75,13 @@ export default Vue.extend({
                 :sort-by.sync="sortBy"
                 :sort-desc.sync="sortDesc"
               >
-                <template v-slot:cell(subject)="row">
-                  {{ '#' + row.item.tid + ' - ' + row.value }}
-                </template>
-
                 <template v-slot:cell(actions)="row">
                   <b-button
                     size="sm"
                     class="btn-info text-nowrap mr-1"
-                    @click="openShowPage(row.item.id)"
+                    @click="openEditPage(row.item.id)"
                   >
-                    View
-                  </b-button>
-                  <b-button
-                    size="sm"
-                    class="btn-danger text-nowrap mr-1"
-                    @click="deleteItem(row.item.id)"
-                  >
-                    Delete
+                    Edit
                   </b-button>
                 </template>
               </b-table>

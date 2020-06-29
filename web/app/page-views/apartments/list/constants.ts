@@ -34,5 +34,11 @@ export const FIELDS = [
     sortable: true,
     thClass: 'text-info align-middle border-secondary',
     tdClass: 'text-muted align-middle'
+  },
+  {
+    key: 'actions',
+    label: '',
+    thClass: 'text-info align-middle border-secondary',
+    tdClass: 'align-middle'
   }
 ]

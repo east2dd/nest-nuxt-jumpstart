@@ -1,4 +1,4 @@
-# 45air-dashboard
+# dashboard
 
 > My mathematical Nuxt.js project
 

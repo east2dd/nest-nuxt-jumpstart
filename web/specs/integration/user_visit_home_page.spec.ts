@@ -5,7 +5,7 @@ describe('As a user, I can visit home page', () => {
     })
 
     it('Then I should see page title', () => {
-      cy.title().should('eq', '45air-dashboard')
+      cy.title().should('eq', 'dashboard')
     })
   })
 })
