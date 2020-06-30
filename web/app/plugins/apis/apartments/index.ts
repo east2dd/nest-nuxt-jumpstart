@@ -18,7 +18,7 @@ export const get = (id: number): Promise<any> => {
 }
 
 export const create = (params: CreateApartmentDto) => {
-  return $axios.$post(apiUrl(APARTMENTS_URL), params)
+  return $axios.$post(apiUrl(APARTMENTS_URL, { query: "" }), params)
 }
 
 export const update = (id: number, params: UpdateApartmentDto) => {

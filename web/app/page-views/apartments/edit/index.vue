@@ -2,19 +2,13 @@
 import Vue from 'vue'
 import { Apartment } from '../shared/interfaces'
 import { UPDATE_ITEM_VALIDATIONS } from './constants'
+import { GOOGLE_MAP_OPTIONS } from '../new/constants'
 
 export default Vue.extend({
   data() {
     return {
       submitted: false,
-      options: {
-        disableDefaultUI: true,
-        scrollwheel: false,
-        navigationControl: false,
-        mapTypeControl: false,
-        scaleControl: false,
-        draggable: false,
-      }
+      googleMapOptions: GOOGLE_MAP_OPTIONS
     }
   },
   validations: {
@@ -240,7 +234,7 @@ export default Vue.extend({
             </b-col>
             <b-col xs="12" md="6">
               <gmap-map
-                :options="options"
+                :options="googleMapOptions"
                 :center="{ lat: 11, lng: 12 }" 
                 :zoom="3" style="height: 400px"
                 >

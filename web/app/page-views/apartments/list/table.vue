@@ -13,7 +13,7 @@ export default Vue.extend({
     return {
       fields: FIELDS,
       sortBy: 'name',
-      sortDesc: true
+      sortDesc: false
     }
   },
   computed: {
