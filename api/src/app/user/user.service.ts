@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { User } from './user.entity';
-import { CreateUserDto } from './dto/create-user.dto';
-import AuthRegisterService from '../auth/service/auth.register.service';
-import { UpdateUserDto } from './dto/update-user.dto';
-import {paginate, Pagination, IPaginationOptions} from 'nestjs-typeorm-paginate';
-import { UserRepository } from './user.repository';
+import { User } from './user.entity'
+import { CreateUserDto } from './dto/create-user.dto'
+import AuthRegisterService from '../auth/service/auth.register.service'
+import { UpdateUserDto } from './dto/update-user.dto'
+import { Pagination, IPaginationOptions} from 'nestjs-typeorm-paginate'
+import { UserRepository } from './user.repository'
+import { UserPaginateService } from './service/user.paginate.service'
 @Injectable()
 export class UserService {
   constructor(
@@ -15,6 +16,12 @@ export class UserService {
 
   all(): Promise<User[]> {
     return this.userRepository.find()
+  }
+
+  async paginate(options: IPaginationOptions, params = {}): Promise<Pagination<User>> {
+    const service = new UserPaginateService( this.userRepository, options, params)
+
+    return await service.call()
   }
 
   find(id: number): Promise<User> {

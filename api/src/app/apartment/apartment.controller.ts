@@ -26,7 +26,7 @@ export class ApartmentController {
   public async index(
     @Req() req: Request,
     @Query('page') page = 1, 
-    @Query('limit') limit = 2
+    @Query('limit') limit = 15
   ) {
     try {
       return await this.userService.paginate({ page, limit }, req.query)

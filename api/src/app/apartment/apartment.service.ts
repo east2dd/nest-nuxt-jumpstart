@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Apartment } from './apartment.entity';
-import { CreateApartmentDto } from './dto/create-apartment.dto';
-import { UpdateApartmentDto } from './dto/update-apartment.dto';
-import { paginate, IPaginationOptions, Pagination } from 'nestjs-typeorm-paginate';
-import { ApartmentRepository } from './apartment.repository';
-import { UserRepository } from '../user/user.repository';
-import { Brackets } from 'typeorm';
-import { ApartmentPaginateService } from './service/apartment.paginate.service';
+import { Apartment } from './apartment.entity'
+import { CreateApartmentDto } from './dto/create-apartment.dto'
+import { UpdateApartmentDto } from './dto/update-apartment.dto'
+import { paginate, IPaginationOptions, Pagination } from 'nestjs-typeorm-paginate'
+import { ApartmentRepository } from './apartment.repository'
+import { UserRepository } from '../user/user.repository'
+import { Brackets } from 'typeorm'
+import { ApartmentPaginateService } from './service/apartment.paginate.service'
 
 @Injectable()
 export class ApartmentService {
