@@ -1,9 +1,5 @@
 <template>
-  <div class="container">
-    <div>
-      <Page />
-    </div>
-  </div>
+  <Page />
 </template>
 
 <script lang="ts">
