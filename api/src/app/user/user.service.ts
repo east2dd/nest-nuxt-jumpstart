@@ -1,16 +1,16 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Repository } from 'typeorm'
-import { User } from './user.entity'
+import { User } from './user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import AuthRegisterService from '../auth/service/auth.register.service';
 import { UpdateUserDto } from './dto/update-user.dto';
-
+import {paginate, Pagination, IPaginationOptions} from 'nestjs-typeorm-paginate';
+import { UserRepository } from './user.repository';
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User)
-    private userRepository: Repository<User>,
+    private userRepository: UserRepository,
   ) {}
 
   all(): Promise<User[]> {

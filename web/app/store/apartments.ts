@@ -2,10 +2,18 @@ import { ActionTree, MutationTree } from 'vuex'
 import { RootState } from '~/store'
 import { SET_APARTMENT, SET_APARTMENTS } from '~/store/constants'
 import * as ApartmentsApi from '~/plugins/apis/apartments'
-import { alertSuccess, alertError } from './helper';
+import { alertSuccess, alertError } from './helper'
+import { Pagination, PaginationMeta } from '../common/pagination'
 
+const defaultPaginationMeta: PaginationMeta = {
+  totalItems: 0,
+  itemCount: 0,
+  itemsPerPage: 0,
+  totalPages: 0,
+  currentPage: 1
+}
 export const state = () => ({
-  items: [] as any,
+  items: { items: [], meta: defaultPaginationMeta } as Pagination,
   item: {} as any
 })
 
@@ -17,8 +25,8 @@ export const mutations: MutationTree<TicketModuleState> = {
 }
 
 export const actions: ActionTree<TicketModuleState, RootState> = {
-  getApartments({ commit, dispatch }) {
-    return ApartmentsApi.all()
+  getApartments({ commit, dispatch }, params) {
+    return ApartmentsApi.all(params)
       .then((res: any) => {
         commit(SET_APARTMENTS, res)
       })

@@ -5,13 +5,14 @@ import {
 import { CreateApartmentDto } from './dto'
 import { apiUrl } from '~/plugins/apis/helper'
 import { UpdateApartmentDto } from './dto/update-apartment.dto';
+import querystring from 'querystring'
 
 export * from './interfaces'
 
 export const $axios: any = {}
 
-export const all = (): Promise<any> => {
-  return $axios.$get(apiUrl(APARTMENTS_URL))
+export const all = (params = {}): Promise<any> => {
+  return $axios.$get(apiUrl(APARTMENTS_URL, { query: "?" + querystring.stringify(params) }))
 }
 
 export const get = (id: number): Promise<any> => {

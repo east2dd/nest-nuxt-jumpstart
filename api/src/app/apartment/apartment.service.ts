@@ -1,19 +1,31 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Repository } from 'typeorm'
-import { Apartment } from './apartment.entity'
+import { Apartment } from './apartment.entity';
 import { CreateApartmentDto } from './dto/create-apartment.dto';
 import { UpdateApartmentDto } from './dto/update-apartment.dto';
+import { paginate, IPaginationOptions, Pagination } from 'nestjs-typeorm-paginate';
+import { ApartmentRepository } from './apartment.repository';
+import { UserRepository } from '../user/user.repository';
+import { Brackets } from 'typeorm';
+import { ApartmentPaginateService } from './service/apartment.paginate.service';
 
 @Injectable()
 export class ApartmentService {
   constructor(
-    @InjectRepository(Apartment)
-    private apartmentRepository: Repository<Apartment>,
+    @InjectRepository(ApartmentRepository)
+    private apartmentRepository: ApartmentRepository,
+    @InjectRepository(UserRepository)
+    private userRepository: UserRepository,
   ) {}
 
   all(): Promise<Apartment[]> {
     return this.apartmentRepository.find({relations: ["user"]})
+  }
+
+  async paginate(options: IPaginationOptions, params = {}): Promise<Pagination<Apartment>> {
+    const service = new ApartmentPaginateService(this.apartmentRepository, this.userRepository, options, params)
+
+    return await service.call()
   }
 
   find(id: number): Promise<Apartment> {

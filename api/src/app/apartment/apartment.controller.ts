@@ -1,4 +1,4 @@
-import { Controller, Get, Req, UseGuards, Body, Post, BadRequestException, Param, Put, Delete } from '@nestjs/common'
+import { Controller, Get, Req, UseGuards, Body, Post, BadRequestException, Param, Put, Delete, Query } from '@nestjs/common'
 import { Request } from '../../common/request'
 import {
   ApiOperation,
@@ -7,9 +7,9 @@ import {
 } from '@nestjs/swagger'
 import { ApartmentService } from './apartment.service'
 import { JwtAuthGuard } from '../auth/jwt-auth.guard'
-import { CreateApartmentDto } from './dto/create-apartment.dto';
-import { UpdateApartmentDto } from './dto/update-apartment.dto';
-import { ApartmentGuard } from './apartment.guard';
+import { CreateApartmentDto } from './dto/create-apartment.dto'
+import { UpdateApartmentDto } from './dto/update-apartment.dto'
+import { ApartmentGuard } from './apartment.guard'
 
 @ApiBearerAuth()
 @ApiTags('Apartment')
@@ -23,9 +23,13 @@ export class ApartmentController {
   @Get('')
   @ApiOperation({ description: 'Get apartment list'})
   @UseGuards(new ApartmentGuard('canRead'))
-  public async index(@Req() req: Request) {
+  public async index(
+    @Req() req: Request,
+    @Query('page') page = 1, 
+    @Query('limit') limit = 2
+  ) {
     try {
-      return await this.userService.all()
+      return await this.userService.paginate({ page, limit }, req.query)
     } catch (e) {
       throw new BadRequestException(e.message)
     }
