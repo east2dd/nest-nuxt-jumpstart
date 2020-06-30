@@ -63,26 +63,21 @@ export default Vue.extend({
 </script>
 
 <template>
-  <div class="row">
-    <div class="col-12">
-      <div class="card">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-9">
-              <div class="card-title">
-                <h2 class="text-warning">
-                  USERS
-                </h2>
-              </div>
-            </div>
-            <div class="col-md-3 text-md-right my-auto">
-              <button class="btn btn-warning" @click="openNewPage">
-                New User
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="card-body bg-light">
+  <div>
+    <b-row class="mb-2">
+      <b-col>
+        <h3 class="d-inline">USERS</h3>
+        <b-button 
+          class="btn btn-warning float-right"
+          @click="openNewPage"
+        >
+          New User
+        </b-button>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col>
+        <b-card>
           <div>
             <div class="table-responsive mb-0">
               <b-table
@@ -107,8 +102,8 @@ export default Vue.extend({
                 </template>
               </b-table>
             </div>
-            <div class="row">
-              <div class="col-sm-6">
+            <b-row>
+              <b-col>
                 <div class="d-flex justify-content-sm-end align-items-center">
                   <ul class="pagination pagination-rounded mb-0">
                     <b-pagination
@@ -118,12 +113,12 @@ export default Vue.extend({
                     />
                   </ul>
                 </div>
-              </div>
-            </div>
+              </b-col>
+            </b-row>
           </div>
-        </div>
-      </div>
-    </div>
+        </b-card>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
