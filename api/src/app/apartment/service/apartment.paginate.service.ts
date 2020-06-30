@@ -38,12 +38,14 @@ export class ApartmentPaginateService{
     return queryBuilder
   }
 
-  private filterByFieldRange(queryBuilder, column: string, range: string){
+  private filterByFieldRange(queryBuilder, column: string, range: string) {
+    if (!range) return
+
     const [ min, max ] = range.split(',')
     if(!min || !max) return
 
     return queryBuilder
-      .andWhere(`${column} > ${parseInt(min)}`)
-      .andWhere(`${column} < ${parseInt(max)}`)
+      .andWhere(`${column} >= ${parseInt(min)}`)
+      .andWhere(`${column} <= ${parseInt(max)}`)
   }
 }
