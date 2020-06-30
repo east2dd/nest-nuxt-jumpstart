@@ -1,7 +1,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { Apartment } from '../shared/interfaces'
-import { UPDATE_ITEM_VALIDATIOS } from './constants'
+import { UPDATE_ITEM_VALIDATIONS } from './constants'
 
 export default Vue.extend({
   data() {
@@ -10,7 +10,7 @@ export default Vue.extend({
     }
   },
   validations: {
-    item: UPDATE_ITEM_VALIDATIOS
+    item: UPDATE_ITEM_VALIDATIONS
   },
   computed: {
     item(): Apartment {
