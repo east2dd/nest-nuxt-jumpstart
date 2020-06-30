@@ -27,14 +27,13 @@ export default Vue.extend({
       this.$v.$touch()
       if (this.$v.$invalid) return
 
-      this.$auth.loginWith('local', { data: this.user })
-        .catch(()=>{
-          this.$notify({
-            group: 'main',
-            type: 'warn',
-            text: 'Email and password does not match'
-          })
+      this.$auth.loginWith('local', { data: this.user }).catch(() => {
+        this.$notify({
+          group: 'main',
+          type: 'warn',
+          text: 'Email and password does not match'
         })
+      })
     }
   }
 })

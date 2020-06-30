@@ -3,14 +3,14 @@ import Vue from 'vue'
 import { required, numeric, minLength, sameAs } from 'vuelidate/lib/validators'
 import { User } from '../shared/interfaces'
 import { USER_ROLE_OPTIONS } from '../shared/constants'
-import { UPDATE_ITEM_VALIDATIONS } from './constants';
+import { UPDATE_ITEM_VALIDATIONS } from './constants'
 
 export default Vue.extend({
   data() {
     return {
       submitted: false,
-      password: "",
-      passwordConfirmation: "",
+      password: '',
+      passwordConfirmation: '',
       roleOptions: USER_ROLE_OPTIONS
     }
   },
@@ -40,7 +40,7 @@ export default Vue.extend({
       })
     },
     deleteItem() {
-      if (!confirm("Do you want to delete this user?")) return
+      if (!confirm('Do you want to delete this user?')) return
 
       this.$store.dispatch('users/deleteUser', this.item.id).then(() => {
         this.openList()
@@ -116,11 +116,7 @@ export default Vue.extend({
               </div>
             </b-form-group>
 
-            <b-form-group
-              id="role-group"
-              label="Role"
-              label-for="role"
-            >
+            <b-form-group id="role-group" label="Role" label-for="role">
               <b-form-select
                 v-model="item.role"
                 size="md"
@@ -148,7 +144,10 @@ export default Vue.extend({
                 :class="{ 'is-invalid': submitted && $v.item.email.$error }"
               ></b-form-input>
 
-              <div v-if="submitted && $v.item.email.$error" class="invalid-feedback">
+              <div
+                v-if="submitted && $v.item.email.$error"
+                class="invalid-feedback"
+              >
                 <span v-if="!$v.item.email.required">
                   This value is required.
                 </span>

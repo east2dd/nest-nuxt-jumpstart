@@ -2,7 +2,7 @@
 import Vue from 'vue'
 import { required, numeric } from 'vuelidate/lib/validators'
 import { Apartment } from '../shared/interfaces'
-import { CREATE_ITEM_VALIDATIONS } from './constants';
+import { CREATE_ITEM_VALIDATIONS } from './constants'
 
 export default Vue.extend({
   data() {
@@ -217,5 +217,4 @@ export default Vue.extend({
   </div>
 </template>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

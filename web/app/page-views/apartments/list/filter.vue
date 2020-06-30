@@ -1,16 +1,14 @@
-
 <script lang="ts">
 import querystring from 'querystring'
 import Vue from 'vue'
 
 export default Vue.extend({
-  components: {
-  },
-  data: function () {
+  components: {},
+  data: function() {
     return {
       pricePerMonth: [0, 5000],
       floorAreaSize: [0, 1000],
-      numberOfRooms: [0, 20],
+      numberOfRooms: [0, 20]
     }
   },
   methods: {
@@ -39,33 +37,48 @@ export default Vue.extend({
   <div>
     <div class="mb-4">
       <div>Price Per Month</div>
-      <vue-slider v-model="pricePerMonth" :enable-cross="false" :min="0" :max="5000"></vue-slider>
+      <vue-slider
+        v-model="pricePerMonth"
+        :enable-cross="false"
+        :min="0"
+        :max="5000"
+      ></vue-slider>
       <div>{{ pricePerMonth[0] }} ~ {{ pricePerMonth[1] }} ($)</div>
     </div>
     <div class="mb-4">
       <div>Floor Area Size</div>
-      <vue-slider v-model="floorAreaSize" :enable-cross="false" :min="0" :max="1000"></vue-slider>
+      <vue-slider
+        v-model="floorAreaSize"
+        :enable-cross="false"
+        :min="0"
+        :max="1000"
+      ></vue-slider>
       <div>{{ floorAreaSize[0] }} ~ {{ floorAreaSize[1] }} (m x m)</div>
     </div>
     <div class="mb-4">
       <div>Number Or Rooms</div>
-      <vue-slider v-model="numberOfRooms" :enable-cross="false" :min="0" :max="20"></vue-slider>
+      <vue-slider
+        v-model="numberOfRooms"
+        :enable-cross="false"
+        :min="0"
+        :max="20"
+      ></vue-slider>
       <div>{{ numberOfRooms[0] }} ~ {{ numberOfRooms[1] }}</div>
     </div>
     <div class="mb-4">
       <b-button
-          size="md"
-          class="btn-info text-nowrap mr-1"
-          @click="applyFilters()"
-        >
-          Apply
+        size="md"
+        class="btn-info text-nowrap mr-1"
+        @click="applyFilters()"
+      >
+        Apply
       </b-button>
       <b-button
-          size="md"
-          class="btn-danger text-nowrap mr-1"
-          @click="resetFilters()"
-        >
-          Reset
+        size="md"
+        class="btn-danger text-nowrap mr-1"
+        @click="resetFilters()"
+      >
+        Reset
       </b-button>
     </div>
   </div>

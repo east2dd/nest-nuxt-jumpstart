@@ -37,7 +37,10 @@ export default Vue.extend({
         <p>
           Don't have an account ?
 
-          <nuxt-link to="/account/register" class="font-weight-medium text-primary">
+          <nuxt-link
+            to="/account/register"
+            class="font-weight-medium text-primary"
+          >
             Register
           </nuxt-link>
         </p>

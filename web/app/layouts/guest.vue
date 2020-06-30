@@ -1,6 +1,5 @@
 <script>
-export default {
-}
+export default {}
 </script>
 
 <template>
@@ -8,7 +7,7 @@ export default {
     <div id="layout-wrapper">
       <div class="main-content">
         <div class="page-content">
-          <notifications group="main" position="bottom right"/>
+          <notifications group="main" position="bottom right" />
 
           <div class="container-fluid">
             <nuxt />
@@ -20,7 +19,7 @@ export default {
 </template>
 
 <style scoped>
-.main-content{
-  margin-left: 0!important;
+.main-content {
+  margin-left: 0 !important;
 }
 </style>

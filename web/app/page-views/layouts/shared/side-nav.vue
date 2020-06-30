@@ -1,11 +1,11 @@
 <script>
 import MetisMenu from 'metismenujs/dist/metismenujs'
-import { mapState } from "vuex"
+import { mapState } from 'vuex'
 import { USER_ADMIN } from '../../users/shared/constants'
 
 export default {
   computed: {
-    ...mapState(["auth"])
+    ...mapState(['auth'])
   },
   mounted() {
     document.body.setAttribute('data-sidebar', 'dark')

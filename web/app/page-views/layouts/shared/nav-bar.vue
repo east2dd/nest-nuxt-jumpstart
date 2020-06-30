@@ -1,19 +1,19 @@
 <script>
 import Vue from 'vue'
 import simplebar from 'simplebar-vue'
-import { mapState } from "vuex"
+import { mapState } from 'vuex'
 
 export default Vue.extend({
   components: { simplebar },
   computed: {
-    ...mapState(["auth"])
+    ...mapState(['auth'])
   },
   methods: {
     toggleMenu() {
       this.$parent.toggleMenu()
     },
     openMyApartments() {
-      this.$router.push("/apartments")
+      this.$router.push('/apartments')
     },
     logout() {
       this.$auth.logout()
@@ -46,11 +46,15 @@ export default Vue.extend({
         <b-dropdown right variant="black" toggle-class="header-item">
           <template v-slot:button-content>
             <span class="d-none d-xl-inline-block ml-1">
-              {{auth.user.firstName}} {{auth.user.lastName}}
+              {{ auth.user.firstName }} {{ auth.user.lastName }}
             </span>
             <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
           </template>
-          <a class="dropdown-item" href="javascript: void(0);" @click="openMyApartments">
+          <a
+            class="dropdown-item"
+            href="javascript: void(0);"
+            @click="openMyApartments"
+          >
             <i class="bx bx-home font-size-16 align-middle mr-1"></i>
             My Apartments
           </a>

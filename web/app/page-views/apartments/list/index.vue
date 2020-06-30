@@ -7,12 +7,12 @@ import { PaginationMeta } from '../../../common/pagination'
 import ApartmentFilter from './filter.vue'
 import ApartmentTable from './table.vue'
 import { canNew } from './policy'
-import { mapState } from 'vuex';
+import { mapState } from 'vuex'
 
 export default Vue.extend({
   components: { ApartmentFilter, ApartmentTable },
   computed: {
-    ...mapState(["auth"]),
+    ...mapState(['auth']),
     items(): Apartment[] {
       return this.$store.state.apartments.items.items || []
     },
@@ -21,7 +21,7 @@ export default Vue.extend({
     }
   },
   watch: {
-    $route (to, from){
+    $route(to, from) {
       this.fetchList()
     }
   },
@@ -32,7 +32,10 @@ export default Vue.extend({
     fetchList() {
       let { page = 1 } = this.$route.query
 
-      return this.$store.dispatch('apartments/getApartments', { ...this.$route.query, page })
+      return this.$store.dispatch('apartments/getApartments', {
+        ...this.$route.query,
+        page
+      })
     },
     openNewPage() {
       this.$router.push(`/apartments/new`)
@@ -64,7 +67,11 @@ export default Vue.extend({
               </div>
             </div>
             <div class="col-md-3 text-md-right my-auto">
-              <button v-if="showNewButton()" class="btn btn-warning" @click="openNewPage">
+              <button
+                v-if="showNewButton()"
+                class="btn btn-warning"
+                @click="openNewPage"
+              >
                 New Apartment
               </button>
             </div>

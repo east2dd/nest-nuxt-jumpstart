@@ -9,12 +9,12 @@ export default Vue.extend({
     return {
       item: {} as User,
       submitted: false,
-      password: "",
-      passwordConfirmation: "",
+      password: '',
+      passwordConfirmation: '',
       roleOptions: [
         { text: 'Client', value: 0 },
         { text: 'Realtor', value: 1 },
-        { text: 'Admin', value: 2 },
+        { text: 'Admin', value: 2 }
       ]
     }
   },
@@ -109,11 +109,7 @@ export default Vue.extend({
               </div>
             </b-form-group>
 
-            <b-form-group
-              id="role-group"
-              label="Role"
-              label-for="role"
-            >
+            <b-form-group id="role-group" label="Role" label-for="role">
               <b-form-select
                 v-model="item.role"
                 size="md"
@@ -141,7 +137,10 @@ export default Vue.extend({
                 :class="{ 'is-invalid': submitted && $v.item.email.$error }"
               ></b-form-input>
 
-              <div v-if="submitted && $v.item.email.$error" class="invalid-feedback">
+              <div
+                v-if="submitted && $v.item.email.$error"
+                class="invalid-feedback"
+              >
                 <span v-if="!$v.item.email.required">
                   This value is required.
                 </span>
@@ -151,7 +150,11 @@ export default Vue.extend({
               </div>
             </b-form-group>
 
-            <b-form-group id="password-group" label="Password" label-for="password">
+            <b-form-group
+              id="password-group"
+              label="Password"
+              label-for="password"
+            >
               <b-form-input
                 id="password"
                 v-model="password"
@@ -161,7 +164,10 @@ export default Vue.extend({
                 :class="{ 'is-invalid': submitted && $v.password.$error }"
               ></b-form-input>
 
-              <div v-if="submitted && $v.password.$error" class="invalid-feedback">
+              <div
+                v-if="submitted && $v.password.$error"
+                class="invalid-feedback"
+              >
                 <span v-if="!$v.password.required">
                   This value is required.
                 </span>
@@ -179,7 +185,9 @@ export default Vue.extend({
                 name="password_confirmation"
                 type="password"
                 placeholder="Confirm password"
-                :class="{ 'is-invalid': submitted && $v.passwordConfirmation.$error }"
+                :class="{
+                  'is-invalid': submitted && $v.passwordConfirmation.$error
+                }"
               ></b-form-input>
 
               <div

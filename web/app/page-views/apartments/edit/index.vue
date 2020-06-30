@@ -35,11 +35,13 @@ export default Vue.extend({
       })
     },
     deleteItem() {
-      if (!confirm("Do you want to delete this item?")) return
+      if (!confirm('Do you want to delete this item?')) return
 
-      this.$store.dispatch('apartments/deleteApartment', this.item.id).then(() => {
-        this.openList()
-      })
+      this.$store
+        .dispatch('apartments/deleteApartment', this.item.id)
+        .then(() => {
+          this.openList()
+        })
     },
     openList() {
       this.$router.push('/apartments')
@@ -239,5 +241,4 @@ export default Vue.extend({
   </div>
 </template>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

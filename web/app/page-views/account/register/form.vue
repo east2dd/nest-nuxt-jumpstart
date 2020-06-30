@@ -51,21 +51,26 @@ export default Vue.extend({
       const { firstName, lastName, email } = this.user
 
       try {
-        await this.$api.auth.register({ firstName, lastName, email, password: this.password });
-        this.$router.push("/login");
+        await this.$api.auth.register({
+          firstName,
+          lastName,
+          email,
+          password: this.password
+        })
+        this.$router.push('/login')
         this.$notify({
-          group: "success",
-          title: "Success!",
-          text: "Account created successfully"
-        });
+          group: 'success',
+          title: 'Success!',
+          text: 'Account created successfully'
+        })
       } catch (error) {
         this.$notify({
-          group: "error",
-          title: "Error!",
+          group: 'error',
+          title: 'Error!',
           text: error.response
             ? error.response.data.error
-            : "Sorry an error occured, check your internet"
-        });
+            : 'Sorry an error occured, check your internet'
+        })
       }
     }
   }

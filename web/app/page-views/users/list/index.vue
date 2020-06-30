@@ -1,7 +1,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { User } from '../shared/interfaces'
-import { USER_ROLES } from '../shared/constants';
+import { USER_ROLES } from '../shared/constants'
 import { FIELDS } from './constants'
 
 export default Vue.extend({

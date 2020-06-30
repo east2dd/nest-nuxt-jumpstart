@@ -9,8 +9,7 @@ export default {
       isMenuCondensed: false
     }
   },
-  created: () => {
-  },
+  created: () => {},
   methods: {
     toggleMenu() {
       document.body.classList.toggle('sidebar-enable')

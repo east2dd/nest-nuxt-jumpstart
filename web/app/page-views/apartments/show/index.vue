@@ -73,10 +73,7 @@ export default Vue.extend({
               <button class="btn btn-info w-100" @click="openList">Back</button>
             </div>
             <div class="col-md-3 col-lg-3 col-xl-2 mt-2 mt-md-0">
-              <button
-                class="btn btn-danger w-100"
-                @click="deleteItem"
-              >
+              <button class="btn btn-danger w-100" @click="deleteItem">
                 Delete
               </button>
             </div>

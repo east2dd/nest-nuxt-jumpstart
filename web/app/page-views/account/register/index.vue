@@ -33,7 +33,10 @@ export default Vue.extend({
       <div class="mt-5 text-center">
         <p>
           Already have an account ?
-          <nuxt-link to="/account/Login" class="font-weight-medium text-primary">
+          <nuxt-link
+            to="/account/Login"
+            class="font-weight-medium text-primary"
+          >
             Login
           </nuxt-link>
         </p>
