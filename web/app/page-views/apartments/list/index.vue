@@ -79,19 +79,19 @@ export default Vue.extend({
         <div class="card-body bg-light">
           <div class="row">
             <div class="col-md-3">
-              <ApartmentFilter></ApartmentFilter>
+              <ApartmentFilter />
             </div>
             <div class="col-md-9">
-              <ApartmentTable :items="items"></ApartmentTable>
+              <ApartmentTable :items="items" />
               <div class="row">
                 <div class="col-sm-6">
-                  <div class="paging_simple_numbers">
+                  <div class="d-flex justify-content-sm-end align-items-center">
                     <ul class="pagination pagination-rounded mb-0">
                       <b-pagination
                         :total-rows="paginationMeta.totalItems"
                         :per-page="paginationMeta.itemsPerPage"
                         @change="openPage"
-                      ></b-pagination>
+                      />
                     </ul>
                   </div>
                 </div>

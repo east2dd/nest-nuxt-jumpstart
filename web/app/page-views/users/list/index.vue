@@ -1,7 +1,9 @@
 <script lang="ts">
+import querystring from 'querystring'
 import Vue from 'vue'
 import { User } from '../shared/interfaces'
 import { USER_ROLES } from '../shared/constants'
+import { PaginationMeta } from '../../../common/pagination'
 import { FIELDS } from './constants'
 
 export default Vue.extend({
@@ -19,13 +21,15 @@ export default Vue.extend({
   },
   computed: {
     items(): User[] {
-      return this.$store.state.users.items
+      return this.$store.state.users.items.items || []
     },
-    tableData(): User[] {
-      return this.items
-    },
-    pageCount(): number {
-      return Math.ceil(this.totalRows / this.perPage)
+    paginationMeta(): PaginationMeta {
+      return Object.assign({}, this.$store.state.users.items.meta)
+    }
+  },
+  watch: {
+    $route(_to, _from) {
+      this.fetchList()
     }
   },
   created() {
@@ -33,10 +37,23 @@ export default Vue.extend({
   },
   methods: {
     fetchList() {
-      this.$store.dispatch('users/getUsers')
+      const { page = 1 } = this.$route.query
+
+      return this.$store.dispatch('users/getUsers', {
+        ...this.$route.query,
+        page
+      })
     },
     openNewPage() {
       this.$router.push(`/users/new`)
+    },
+    openPage(page: number) {
+      const query = {
+        ...this.$route.query,
+        page
+      }
+
+      this.$router.push(`/users?${querystring.stringify(query)}`)
     },
     openEditPage(id: string) {
       this.$router.push(`/users/${id}/edit`)
@@ -53,7 +70,9 @@ export default Vue.extend({
           <div class="row">
             <div class="col-md-9">
               <div class="card-title">
-                <h2 class="text-warning">USERS</h2>
+                <h2 class="text-warning">
+                  USERS
+                </h2>
               </div>
             </div>
             <div class="col-md-3 text-md-right my-auto">
@@ -67,11 +86,9 @@ export default Vue.extend({
           <div>
             <div class="table-responsive mb-0">
               <b-table
-                :items="tableData"
+                :items="items"
                 :fields="fields"
                 responsive="sm"
-                :per-page="perPage"
-                :current-page="currentPage"
                 :sort-by.sync="sortBy"
                 :sort-desc.sync="sortDesc"
               >
@@ -92,29 +109,13 @@ export default Vue.extend({
             </div>
             <div class="row">
               <div class="col-sm-6">
-                <div
-                  class="dataTables_length h-100 d-inline-flex align-items-center"
-                >
-                  <label class="text-nowrap mb-0">
-                    Results Per Page&nbsp;
-                  </label>
-                  <b-form-select
-                    v-model="perPage"
-                    size="sm"
-                    :options="pageOptions"
-                  ></b-form-select>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div
-                  class="dataTables_paginate paging_simple_numbers d-flex justify-content-sm-end align-items-center"
-                >
+                <div class="d-flex justify-content-sm-end align-items-center">
                   <ul class="pagination pagination-rounded mb-0">
                     <b-pagination
-                      v-model="currentPage"
-                      :total-rows="totalRows"
-                      :per-page="perPage"
-                    ></b-pagination>
+                      :total-rows="paginationMeta.totalItems"
+                      :per-page="paginationMeta.itemsPerPage"
+                      @change="openPage"
+                    />
                   </ul>
                 </div>
               </div>
