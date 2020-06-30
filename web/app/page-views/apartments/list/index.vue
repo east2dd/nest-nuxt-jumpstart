@@ -55,37 +55,31 @@ export default Vue.extend({
 </script>
 
 <template>
-  <div class="row">
-    <div class="col-12">
-      <div class="card">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-9">
-              <div class="card-title">
-                <h2 class="text-warning">APARTMENTS</h2>
-              </div>
-            </div>
-            <div class="col-md-3 text-md-right my-auto">
-              <button
-                v-if="showNewButton()"
-                class="btn btn-warning"
-                @click="openNewPage"
-              >
-                New Apartment
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="card-body bg-light">
-          <div class="row">
-            <div class="col-md-3">
+  <div>
+    <b-row class="mb-2">
+      <b-col>
+        <h3 class="d-inline">APARTMENTS</h3>
+        <b-button
+          class="btn btn-warning float-right"
+          v-if="showNewButton()"
+          @click="openNewPage"
+        >
+          New Apartment
+        </b-button>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col>
+        <b-card>
+          <b-row>
+            <b-col xs="12" md="3">
               <ApartmentFilter />
-            </div>
-            <div class="col-md-9">
+            </b-col>
+            <b-col xs="12" md="9">
               <ApartmentTable :items="items" />
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="d-flex justify-content-sm-end align-items-center">
+              <b-row>
+                <b-col>
+                  <div class="dataTables_paginate paging_simple_numbers float-right">
                     <ul class="pagination pagination-rounded mb-0">
                       <b-pagination
                         :total-rows="paginationMeta.totalItems"
@@ -94,13 +88,13 @@ export default Vue.extend({
                       />
                     </ul>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+                </b-col>
+              </b-row>
+            </b-col>
+          </b-row>
+        </b-card>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
