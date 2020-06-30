@@ -29,13 +29,14 @@
       "@nuxtjs/axios",
       "@nuxtjs/auth",
       "cypress",
-      "~/api/types"
+      "~common/types"
     ]
   },
   "exclude": [
     "node_modules",
     ".nuxt",
     "dist",
-    "app/test"
+    "app/test",
+    "app/middleware"
   ]
 }

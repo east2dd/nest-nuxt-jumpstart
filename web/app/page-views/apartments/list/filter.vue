@@ -1,8 +1,9 @@
 
 <script lang="ts">
 import querystring from 'querystring'
+import Vue from 'vue'
 
-export default {
+export default Vue.extend({
   components: {
   },
   data: function () {
@@ -31,7 +32,7 @@ export default {
       this.$router.push(`/apartments`)
     }
   }
-}
+})
 </script>
 
 <template>

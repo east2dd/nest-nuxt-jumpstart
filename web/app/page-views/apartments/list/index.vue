@@ -6,10 +6,13 @@ import { Apartment } from '../shared/interfaces'
 import { PaginationMeta } from '../../../common/pagination'
 import ApartmentFilter from './filter.vue'
 import ApartmentTable from './table.vue'
+import { canNew } from './policy'
+import { mapState } from 'vuex';
 
 export default Vue.extend({
   components: { ApartmentFilter, ApartmentTable },
   computed: {
+    ...mapState(["auth"]),
     items(): Apartment[] {
       return this.$store.state.apartments.items.items || []
     },
@@ -41,6 +44,9 @@ export default Vue.extend({
       }
 
       this.$router.push(`/apartments?${querystring.stringify(query)}`)
+    },
+    showNewButton(): boolean {
+      return canNew(this.auth.user)
     }
   }
 })
@@ -58,7 +64,7 @@ export default Vue.extend({
               </div>
             </div>
             <div class="col-md-3 text-md-right my-auto">
-              <button class="btn btn-warning" @click="openNewPage">
+              <button v-if="showNewButton()" class="btn btn-warning" @click="openNewPage">
                 New Apartment
               </button>
             </div>

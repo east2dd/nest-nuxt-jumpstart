@@ -7,4 +7,5 @@ export interface Apartment {
   pricePerMonth: number
   latitude: number
   longitude: number
+  userId: number
 }

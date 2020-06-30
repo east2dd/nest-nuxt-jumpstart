@@ -82,7 +82,7 @@ export default {
     },
     redirect: {
       login: '/account/login',
-      logout: '/',
+      logout: '/account/login',
       home: '/apartments'
     }
   },
@@ -91,7 +91,7 @@ export default {
    */
   router: {
     mode: 'history',
-    middleware: 'auth'
+    middleware: ['auth', 'access-guard']
   },
   /*
    ** Build configuration

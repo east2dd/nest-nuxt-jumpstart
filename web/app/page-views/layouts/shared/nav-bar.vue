@@ -13,11 +13,10 @@ export default Vue.extend({
       this.$parent.toggleMenu()
     },
     openMyApartments() {
-      this.$router.push("/apartments");
+      this.$router.push("/apartments")
     },
     logout() {
-      this.$auth.logout();
-      this.$router.push("/login");
+      this.$auth.logout()
     }
   }
 })
