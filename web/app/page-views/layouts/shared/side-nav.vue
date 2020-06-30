@@ -1,8 +1,12 @@
 <script>
 import MetisMenu from 'metismenujs/dist/metismenujs'
+import { mapState } from "vuex"
+import { USER_ADMIN } from '../../users/shared/constants'
 
 export default {
-  components: {},
+  computed: {
+    ...mapState(["auth"])
+  },
   mounted() {
     document.body.setAttribute('data-sidebar', 'dark')
 
@@ -14,6 +18,11 @@ export default {
         matchingMenuItem = links[i]
         break
       }
+    }
+  },
+  methods: {
+    isAdmin() {
+      return this.auth.user.role == USER_ADMIN
     }
   }
 }
@@ -30,7 +39,7 @@ export default {
         </nuxt-link>
       </li>
 
-      <li>
+      <li v-if="isAdmin()">
         <nuxt-link to="/users" class="side-nav-link-ref">
           <i class="fas fa-user"></i>
           <span>Users</span>

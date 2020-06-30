@@ -41,7 +41,7 @@ export class UserController {
       return await this.userService.create(params)
     } catch (e) {
       throw new BadRequestException(e.message)
-    }    
+    }
   }
 
   @Get(':id')

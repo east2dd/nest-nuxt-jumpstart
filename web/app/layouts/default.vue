@@ -1,5 +1,5 @@
 <script>
-import Vertical from './vertical'
+import Vertical from '../page-views/layouts/vertical'
 
 export default {
   components: {
