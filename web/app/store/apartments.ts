@@ -1,9 +1,9 @@
 import { ActionTree, MutationTree } from 'vuex'
+import { Pagination, PaginationMeta } from '../common/pagination'
+import { alertSuccess, alertError } from './helper'
 import { RootState } from '~/store'
 import { SET_APARTMENT, SET_APARTMENTS } from '~/store/constants'
 import * as ApartmentsApi from '~/plugins/apis/apartments'
-import { alertSuccess, alertError } from './helper'
-import { Pagination, PaginationMeta } from '../common/pagination'
 
 const defaultPaginationMeta: PaginationMeta = {
   totalItems: 0,
@@ -25,7 +25,7 @@ export const mutations: MutationTree<TicketModuleState> = {
 }
 
 export const actions: ActionTree<TicketModuleState, RootState> = {
-  getApartments({ commit, dispatch }, params) {
+  getApartments({ commit }, params) {
     return ApartmentsApi.all(params)
       .then((res: any) => {
         commit(SET_APARTMENTS, res)
@@ -36,7 +36,7 @@ export const actions: ActionTree<TicketModuleState, RootState> = {
         throw err
       })
   },
-  getApartment({ commit, dispatch }, id) {
+  getApartment({ commit }, id) {
     return ApartmentsApi.get(id)
       .then((item: any) => {
         commit(SET_APARTMENT, item)
@@ -47,7 +47,7 @@ export const actions: ActionTree<TicketModuleState, RootState> = {
         throw err
       })
   },
-  createApartment({ dispatch }, params) {
+  createApartment(_store, params) {
     return ApartmentsApi.create(params)
       .then(() => {
         alertSuccess('Created Successfully')
@@ -58,7 +58,7 @@ export const actions: ActionTree<TicketModuleState, RootState> = {
         throw err
       })
   },
-  updateApartment({ dispatch }, params) {
+  updateApartment(_store, params) {
     return ApartmentsApi.update(params.id, params)
       .then(() => {
         alertSuccess('Updated Successfully')
@@ -69,7 +69,7 @@ export const actions: ActionTree<TicketModuleState, RootState> = {
         throw err
       })
   },
-  deleteApartment({ dispatch }, id) {
+  deleteApartment(_store, id) {
     return ApartmentsApi.destroy(id)
       .then(() => {
         alertSuccess('Deleted Successfully')

@@ -1,13 +1,12 @@
 <script lang="ts">
-import Vue from 'vue'
 import querystring from 'querystring'
-
+import Vue from 'vue'
+import { mapState } from 'vuex'
 import { Apartment } from '../shared/interfaces'
 import { PaginationMeta } from '../../../common/pagination'
 import ApartmentFilter from './filter.vue'
 import ApartmentTable from './table.vue'
 import { canNew } from './policy'
-import { mapState } from 'vuex'
 
 export default Vue.extend({
   components: { ApartmentFilter, ApartmentTable },
@@ -21,7 +20,7 @@ export default Vue.extend({
     }
   },
   watch: {
-    $route(to, from) {
+    $route(_to, _from) {
       this.fetchList()
     }
   },
@@ -30,7 +29,7 @@ export default Vue.extend({
   },
   methods: {
     fetchList() {
-      let { page = 1 } = this.$route.query
+      const { page = 1 } = this.$route.query
 
       return this.$store.dispatch('apartments/getApartments', {
         ...this.$route.query,
@@ -83,7 +82,7 @@ export default Vue.extend({
               <ApartmentFilter></ApartmentFilter>
             </div>
             <div class="col-md-9">
-              <ApartmentTable v-bind:items="items"></ApartmentTable>
+              <ApartmentTable :items="items"></ApartmentTable>
               <div class="row">
                 <div class="col-sm-6">
                   <div class="paging_simple_numbers">

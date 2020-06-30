@@ -1,6 +1,5 @@
 <script lang="ts">
 import Vue from 'vue'
-import { required, numeric } from 'vuelidate/lib/validators'
 import { Apartment } from '../shared/interfaces'
 import { UPDATE_ITEM_VALIDATIOS } from './constants'
 
@@ -13,13 +12,13 @@ export default Vue.extend({
   validations: {
     item: UPDATE_ITEM_VALIDATIOS
   },
-  created() {
-    this.fetchItem()
-  },
   computed: {
     item(): Apartment {
       return Object.assign({}, this.$store.state.apartments.item)
     }
+  },
+  created() {
+    this.fetchItem()
   },
   methods: {
     fetchItem() {

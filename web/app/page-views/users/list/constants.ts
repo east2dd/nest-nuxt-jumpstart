@@ -42,4 +42,3 @@ export const FIELDS = [
     tdClass: 'align-middle'
   }
 ]
-

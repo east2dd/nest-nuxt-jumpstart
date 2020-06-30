@@ -1,4 +1,4 @@
-import { required, numeric } from 'vuelidate/lib/validators'
+import { required } from 'vuelidate/lib/validators'
 
 export const UPDATE_ITEM_VALIDATIONS = {
   email: {

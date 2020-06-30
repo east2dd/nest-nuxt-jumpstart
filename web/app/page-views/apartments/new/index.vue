@@ -1,6 +1,5 @@
 <script lang="ts">
 import Vue from 'vue'
-import { required, numeric } from 'vuelidate/lib/validators'
 import { Apartment } from '../shared/interfaces'
 import { CREATE_ITEM_VALIDATIONS } from './constants'
 

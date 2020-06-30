@@ -1,10 +1,6 @@
-import {
-  USERS_URL,
-  USER_URL,
-} from './constants'
-import { CreateUserDto } from './dto'
+import { USERS_URL, USER_URL } from './constants'
+import { CreateUserDto, UpdateUserDto } from './dto'
 import { apiUrl } from '~/plugins/apis/helper'
-import { UpdateUserDto } from './dto/update-user.dto';
 
 export * from './interfaces'
 

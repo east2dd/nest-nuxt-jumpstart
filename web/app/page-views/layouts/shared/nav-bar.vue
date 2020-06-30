@@ -1,10 +1,8 @@
 <script>
 import Vue from 'vue'
-import simplebar from 'simplebar-vue'
 import { mapState } from 'vuex'
 
 export default Vue.extend({
-  components: { simplebar },
   computed: {
     ...mapState(['auth'])
   },

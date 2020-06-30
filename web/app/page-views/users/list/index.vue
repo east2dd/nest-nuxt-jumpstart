@@ -22,8 +22,6 @@ export default Vue.extend({
       return this.$store.state.users.items
     },
     tableData(): User[] {
-      this.totalRows = this.items.length
-
       return this.items
     },
     pageCount(): number {

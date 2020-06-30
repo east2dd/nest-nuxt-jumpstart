@@ -1,7 +1,4 @@
-import {
-  LOGIN_URL,
-  REGISTER_URL,
-} from './constants'
+import { LOGIN_URL, REGISTER_URL } from './constants'
 import { LoginDto, RegisterDto } from './dto'
 import { apiUrl } from '~/plugins/apis/helper'
 

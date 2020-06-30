@@ -1,12 +1,6 @@
 <script lang="ts">
 import Vue from 'vue'
-import {
-  email,
-  required,
-  numeric,
-  minLength,
-  sameAs
-} from 'vuelidate/lib/validators'
+import { email, required, minLength, sameAs } from 'vuelidate/lib/validators'
 import { User } from './interfaces'
 
 export default Vue.extend({

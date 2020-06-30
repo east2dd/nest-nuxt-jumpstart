@@ -1,16 +1,13 @@
 <script lang="ts">
 import Vue from 'vue'
+import { mapState } from 'vuex'
+import { Apartment } from '../shared/interfaces'
 import { FIELDS } from './constants'
 import { canEdit } from './policy'
-import { Apartment } from '../shared/interfaces'
-import { mapState } from 'vuex'
 
 export default Vue.extend({
   props: {
     items: { type: Array }
-  },
-  computed: {
-    ...mapState(['auth'])
   },
   data() {
     return {
@@ -18,6 +15,9 @@ export default Vue.extend({
       sortBy: 'name',
       sortDesc: true
     }
+  },
+  computed: {
+    ...mapState(['auth'])
   },
   methods: {
     openEditPage(id: string) {

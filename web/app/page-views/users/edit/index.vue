@@ -1,6 +1,5 @@
 <script lang="ts">
 import Vue from 'vue'
-import { required, numeric, minLength, sameAs } from 'vuelidate/lib/validators'
 import { User } from '../shared/interfaces'
 import { USER_ROLE_OPTIONS } from '../shared/constants'
 import { UPDATE_ITEM_VALIDATIONS } from './constants'
@@ -17,13 +16,13 @@ export default Vue.extend({
   validations: {
     item: UPDATE_ITEM_VALIDATIONS
   },
-  created() {
-    this.fetchItem()
-  },
   computed: {
     item(): User {
       return Object.assign({}, this.$store.state.users.item)
     }
+  },
+  created() {
+    this.fetchItem()
   },
   methods: {
     fetchItem() {

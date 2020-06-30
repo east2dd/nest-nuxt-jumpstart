@@ -1,18 +1,16 @@
-import {
-  APARTMENTS_URL,
-  APARTMENT_URL,
-} from './constants'
-import { CreateApartmentDto } from './dto'
-import { apiUrl } from '~/plugins/apis/helper'
-import { UpdateApartmentDto } from './dto/update-apartment.dto';
 import querystring from 'querystring'
+import { APARTMENTS_URL, APARTMENT_URL } from './constants'
+import { CreateApartmentDto, UpdateApartmentDto } from './dto'
+import { apiUrl } from '~/plugins/apis/helper'
 
 export * from './interfaces'
 
 export const $axios: any = {}
 
 export const all = (params = {}): Promise<any> => {
-  return $axios.$get(apiUrl(APARTMENTS_URL, { query: "?" + querystring.stringify(params) }))
+  return $axios.$get(
+    apiUrl(APARTMENTS_URL, { query: '?' + querystring.stringify(params) })
+  )
 }
 
 export const get = (id: number): Promise<any> => {

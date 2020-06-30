@@ -1,4 +1,3 @@
-
 export interface Pagination {
   items: []
   meta: PaginationMeta

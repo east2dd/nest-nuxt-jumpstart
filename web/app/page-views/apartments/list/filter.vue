@@ -3,8 +3,7 @@ import querystring from 'querystring'
 import Vue from 'vue'
 
 export default Vue.extend({
-  components: {},
-  data: function() {
+  data() {
     return {
       pricePerMonth: [0, 5000],
       floorAreaSize: [0, 1000],

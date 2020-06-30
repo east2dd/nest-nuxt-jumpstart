@@ -1,31 +1,24 @@
 <script>
+import Vue from 'vue'
 import MetisMenu from 'metismenujs/dist/metismenujs'
 import { mapState } from 'vuex'
 import { USER_ADMIN } from '../../users/shared/constants'
 
-export default {
+export default Vue.extend({
   computed: {
     ...mapState(['auth'])
   },
   mounted() {
     document.body.setAttribute('data-sidebar', 'dark')
-
+    // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
     const menuRef = new MetisMenu('#side-menu')
-    const links = document.getElementsByClassName('side-nav-link-ref')
-    let matchingMenuItem = null
-    for (let i = 0; i < links.length; i++) {
-      if (window.location.pathname === links[i].pathname) {
-        matchingMenuItem = links[i]
-        break
-      }
-    }
   },
   methods: {
     isAdmin() {
-      return this.auth.user.role == USER_ADMIN
+      return this.auth.user.role === USER_ADMIN
     }
   }
-}
+})
 </script>
 
 <template>

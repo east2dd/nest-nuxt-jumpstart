@@ -1,6 +1,5 @@
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
-import { CreateApartmentDto } from './dto'
-import { UpdateApartmentDto } from './dto/update-apartment.dto';
+import { CreateApartmentDto, UpdateApartmentDto } from './dto'
 
 export interface ApartmentApiInterface {
   $axios: NuxtAxiosInstance

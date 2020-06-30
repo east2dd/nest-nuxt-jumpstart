@@ -1,6 +1,6 @@
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
 import { CreateUserDto } from './dto'
-import { UpdateUserDto } from './dto/update-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto'
 
 export interface UserApiInterface {
   $axios: NuxtAxiosInstance

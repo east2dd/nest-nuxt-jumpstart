@@ -1,8 +1,8 @@
 import { ActionTree, MutationTree } from 'vuex'
+import { alertError, alertSuccess } from './helper'
 import { RootState } from '~/store'
 import { SET_USER, SET_USERS } from '~/store/constants'
 import * as UsersApi from '~/plugins/apis/users'
-import { alertError, alertSuccess } from './helper';
 
 export const state = () => ({
   items: [] as any,
@@ -17,7 +17,7 @@ export const mutations: MutationTree<TicketModuleState> = {
 }
 
 export const actions: ActionTree<TicketModuleState, RootState> = {
-  getUsers({ commit, dispatch }) {
+  getUsers({ commit }) {
     return UsersApi.all()
       .then((res: any) => {
         commit(SET_USERS, res)
@@ -27,7 +27,7 @@ export const actions: ActionTree<TicketModuleState, RootState> = {
         throw err
       })
   },
-  getUser({ commit, dispatch }, id) {
+  getUser({ commit }, id) {
     return UsersApi.get(id)
       .then((item: any) => {
         commit(SET_USER, item)
@@ -37,7 +37,7 @@ export const actions: ActionTree<TicketModuleState, RootState> = {
         throw err
       })
   },
-  createUser({ dispatch }, params) {
+  createUser(_store, params) {
     return UsersApi.create(params)
       .then(() => {
         alertSuccess('Created Successfully')
@@ -47,7 +47,7 @@ export const actions: ActionTree<TicketModuleState, RootState> = {
         throw err
       })
   },
-  updateUser({ dispatch }, params) {
+  updateUser(_store, params) {
     return UsersApi.update(params.id, params)
       .then(() => {
         alertSuccess('Updated Successfully')
@@ -57,7 +57,7 @@ export const actions: ActionTree<TicketModuleState, RootState> = {
         throw err
       })
   },
-  deleteUser({ dispatch }, id) {
+  deleteUser(_store, id) {
     return UsersApi.destroy(id)
       .then(() => {
         alertSuccess('Deleted Successfully')

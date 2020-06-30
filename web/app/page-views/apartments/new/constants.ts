@@ -23,5 +23,5 @@ export const CREATE_ITEM_VALIDATIONS = {
   longitude: {
     required,
     numeric
-  },
+  }
 }
