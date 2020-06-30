@@ -112,5 +112,6 @@ export default {
   ignore: ['**/*.test.*', '**/*.spec.*'],
   env: {
     API_URL: process.env.API_URL,
+    GOOGLE_MAP_KEY: process.env.GOOGLE_MAP_KEY
   }
 }

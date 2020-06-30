@@ -18,7 +18,7 @@ Vue.use(VueSweetalert2)
 Vue.component('VueSlider', VueSlider)
 Vue.use(VueGoogleMaps, {
   load: {
-    key: 'secret_key',
+    key: process.env.GOOGLE_MAP_KEY,
     libraries: 'places'
   },
   installComponents: true
