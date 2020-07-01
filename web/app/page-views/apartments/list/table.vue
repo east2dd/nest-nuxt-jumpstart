@@ -41,14 +41,16 @@ export default Vue.extend({
       :sort-desc.sync="sortDesc"
     >
       <template v-slot:cell(actions)="row">
-        <b-button
-          v-if="showEdit(row.item)"
-          size="sm"
-          class="btn-info text-nowrap mr-1"
-          @click="openEditPage(row.item.id)"
-        >
-          Edit
-        </b-button>
+        <div class="text-center">
+          <b-button
+            v-if="showEdit(row.item)"
+            size="sm"
+            class="btn-info text-nowrap mr-1"
+            @click="openEditPage(row.item.id)"
+          >
+            Edit
+          </b-button>
+        </div>
       </template>
 
       <template v-slot:cell(user)="row">

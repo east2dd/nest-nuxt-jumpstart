@@ -92,13 +92,15 @@ export default Vue.extend({
                 </template>
 
                 <template v-slot:cell(actions)="row">
-                  <b-button
-                    size="sm"
-                    class="btn-info text-nowrap mr-1"
-                    @click="openEditPage(row.item.id)"
-                  >
-                    Edit
-                  </b-button>
+                  <div class="text-center">
+                    <b-button
+                      size="sm"
+                      class="btn-info text-nowrap mr-1"
+                      @click="openEditPage(row.item.id)"
+                    >
+                      Edit
+                    </b-button>
+                  </div>
                 </template>
               </b-table>
             </div>
