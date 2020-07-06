@@ -35,7 +35,6 @@ const isAuthenticated = (store: any): boolean => {
 }
 
 export default function({ store, redirect, route }) {
-  console.log(route)
   if (!isAuthenticated(store)) return
   if (isAccessible(store.$auth.user, route.name)) return
   if (route.name === DEFAULT_PAGE_NAME) return

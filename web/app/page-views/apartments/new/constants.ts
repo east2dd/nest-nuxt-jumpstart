@@ -1,4 +1,4 @@
-import { required, numeric } from 'vuelidate/lib/validators'
+import { required, numeric, decimal } from 'vuelidate/lib/validators'
 
 export const CREATE_ITEM_VALIDATIONS = {
   name: {
@@ -6,7 +6,7 @@ export const CREATE_ITEM_VALIDATIONS = {
   },
   floorAreaSize: {
     required,
-    numeric
+    decimal
   },
   numberOfRooms: {
     required,
@@ -14,23 +14,14 @@ export const CREATE_ITEM_VALIDATIONS = {
   },
   pricePerMonth: {
     required,
-    numeric
+    decimal
   },
   latitude: {
     required,
-    numeric
+    decimal
   },
   longitude: {
     required,
-    numeric
+    decimal
   }
-}
-
-export const GOOGLE_MAP_OPTIONS = {
-  disableDefaultUI: true,
-  scrollwheel: false,
-  navigationControl: false,
-  mapTypeControl: false,
-  scaleControl: false,
-  draggable: false,
 }

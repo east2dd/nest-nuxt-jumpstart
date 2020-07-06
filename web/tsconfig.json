@@ -29,7 +29,7 @@
       "@nuxtjs/axios",
       "@nuxtjs/auth",
       "cypress",
-      "~common/types"
+      "google-maps-api-typings"
     ]
   },
   "exclude": [
