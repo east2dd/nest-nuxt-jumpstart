@@ -4,11 +4,17 @@ import Vue from 'vue'
 import { mapState } from 'vuex'
 import { Apartment } from '../shared/interfaces'
 import { PaginationMeta } from '../../../common/pagination'
-import { ApartmentTable, ApartmentsOnMap, ApartmentFilter } from './components'
+import { ApartmentTable, ApartmentsOnMap, ApartmentFilter, ApartmentPagination } from './components'
 import { canNew } from './policy'
+import { ITEMS_PER_PAGE } from './constants'
 
 export default Vue.extend({
-  components: { ApartmentTable, ApartmentsOnMap, ApartmentFilter },
+  components: { ApartmentTable, ApartmentsOnMap, ApartmentFilter, ApartmentPagination },
+  data() {
+    return {
+      itemsPerPage: ITEMS_PER_PAGE
+    }
+  },
   computed: {
     ...mapState(['auth']),
     items(): Apartment[] {
@@ -16,6 +22,14 @@ export default Vue.extend({
     },
     paginationMeta(): PaginationMeta {
       return Object.assign({}, this.$store.state.apartments.items.meta)
+    },
+    selectedItemId(): number {
+      return this.$store.state.apartments.selectedItemId || 0
+    },
+    selectedItem(): Apartment | undefined {
+      return this.items.find((item) => {
+        return item.id == this.selectedItemId
+      })
     }
   },
   watch: {
@@ -28,26 +42,30 @@ export default Vue.extend({
   },
   methods: {
     fetchList() {
-      const { page = 1 } = this.$route.query
+      const { page = 1, limit = this.itemsPerPage } = this.$route.query
 
       return this.$store.dispatch('apartments/getApartments', {
         ...this.$route.query,
-        page
+        page,
+        limit
       })
     },
     openNewPage() {
       this.$router.push(`/apartments/new`)
     },
-    openPage(page: number) {
-      const query = {
-        ...this.$route.query,
-        page
-      }
-
-      this.$router.push(`/apartments?${querystring.stringify(query)}`)
-    },
     showNewButton(): boolean {
       return canNew(this.auth.user)
+    },
+    selectApartment(itemId: number): void {
+      this.$store.dispatch('apartments/selectApartment', itemId)
+        .then(() => {
+          if (this.selectedItem != undefined) {
+            this.$refs.apartmentsMap.moveCenter({
+              lat: this.selectedItem.latitude,
+              lng: this.selectedItem.longitude
+            })
+          }
+        })
     }
   }
 })
@@ -85,25 +103,25 @@ export default Vue.extend({
               </b-collapse>
             </b-col>
             <b-col cols="12">
-              <ApartmentTable :items="items" />
+              <ApartmentTable
+                :items-per-page="itemsPerPage"
+                :items="items"
+                :selectApartmentAction="selectApartment"
+              />
             </b-col>
             <b-col cols="12">
-              <div class="dataTables_paginate paging_simple_numbers float-right">
-                <ul class="pagination pagination-rounded mb-0">
-                  <b-pagination
-                    :total-rows="paginationMeta.totalItems"
-                    :per-page="paginationMeta.itemsPerPage"
-                    @change="openPage"
-                  />
-                </ul>
-              </div>
+              <ApartmentPagination />
             </b-col>
           </b-row>
         </b-card>
       </b-col>
       <b-col md="7">
         <b-card>
-          <ApartmentsOnMap :items="items" />
+          <ApartmentsOnMap
+            ref="apartmentsMap"
+            :items="items"
+            :selectApartmentAction="selectApartment"
+          />
         </b-card>
       </b-col>
     </b-row>

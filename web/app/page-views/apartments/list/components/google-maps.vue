@@ -6,12 +6,13 @@ import { Apartment } from '../../shared/interfaces'
 
 export default Vue.extend({
   props: {
-    items: { type: Array as () => Apartment[] }
+    items: { type: Array as () => Apartment[] },
+    selectApartmentAction: { type: Function }
   },
   data() {
     return {
       googleMapOptions: GOOGLE_MAP_OPTIONS,
-      center: {lat:10, lng:10}
+      mapCenter: {lat: 10, lng: 10}
     }
   },
   watch : {
@@ -23,15 +24,15 @@ export default Vue.extend({
     }
   },
   methods: {
-    mapFitBounds(){
+    selectApartment(itemId: number): void {
+      this.selectApartmentAction(itemId)
+    },
+    mapFitBounds(): void{
       this.$refs.map.$mapPromise.then((map: any) => {
         this.fit(map)
       })
     },
-    selectApartment(itemId: number): void {
-      this.$store.dispatch('apartments/selectApartment', itemId)
-    },
-    fit(map: any) {
+    fit(map: any): void {
       const bounds = new google.maps.LatLngBounds()
       this.items.forEach((item) => {
         const itemCoords = new google.maps.LatLng(item.latitude, item.longitude)
@@ -39,7 +40,7 @@ export default Vue.extend({
       })
       map.fitBounds(bounds)
     },
-    getPosition(item: Apartment) {
+    getPosition(item: Apartment): any {
       return { lat: item.latitude, lng: item.longitude }
     },
     getInfoOptions(item: Apartment): object {
@@ -51,7 +52,7 @@ export default Vue.extend({
         content: this.getInfoContent(item)
       }
     },
-    getInfoContent(item: Apartment) {
+    getInfoContent(item: Apartment): string {
       return `
           <div class="table-responsive table-sm table-borderless m-0">
             <table class="table mb-0">
@@ -104,9 +105,15 @@ export default Vue.extend({
             </table>
           </div>
         `;
+    },
+    moveCenter(position: any): void {
+      this.$refs.map.$mapPromise.then((map: any) => {
+        map.setCenter(position)
+      })
     }
   },
   mounted() {
+    this.selectApartment(0)
     this.mapFitBounds()
   }
 })
@@ -118,7 +125,7 @@ export default Vue.extend({
     ref="map"
     :zoom="7"
     :options="googleMapOptions"
-    :center="center"
+    :center="mapCenter"
   >
     <gmap-marker
       v-for="(item, index) in items"
@@ -133,6 +140,7 @@ export default Vue.extend({
       :position="getPosition(item)"
       :opened="selectedItemId == item.id"
       :options="getInfoOptions(item)"
+      @closeclick="selectApartment(0)"
     />
   </gmap-map>
 </template>

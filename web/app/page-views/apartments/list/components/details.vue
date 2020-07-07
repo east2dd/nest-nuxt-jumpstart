@@ -22,8 +22,8 @@ export default Vue.extend({
           <tr>
             <td>State :</td>
             <td>
-              <span class="text-success">
-                Available
+              <span :class="`${item.state == 0 ? 'text-success' : 'text-danger'}`">
+                {{ item.state == 0 ? 'Available' : 'Rented' }}
               </span>
             </td>
           </tr>

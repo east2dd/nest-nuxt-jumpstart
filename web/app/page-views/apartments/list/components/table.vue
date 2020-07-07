@@ -9,7 +9,9 @@ import { ApartmentDetails } from './'
 export default Vue.extend({
   components: { ApartmentDetails },
   props: {
-    items: { type: Array }
+    items: { type: Array },
+    selectApartmentAction: { type: Function },
+    itemsPerPage: { type: Number }
   },
   data() {
     return {
@@ -29,7 +31,7 @@ export default Vue.extend({
       return canEdit(this.auth.user, apartment)
     },
     selectApartment(itemId: number): void {
-      this.$store.dispatch('apartments/selectApartment', itemId)
+      this.selectApartmentAction(itemId)
     }
   }
 })
@@ -43,14 +45,14 @@ export default Vue.extend({
       :items="items"
       :fields="fields"
       responsive="sm"
-      :per-page="100"
+      :per-page="itemsPerPage"
       :sort-by.sync="sortBy"
       :sort-desc.sync="sortDesc"
     >
       <template v-slot:cell(name)="row">
         <h6
           :id="'popover-target-' + row.item.id"
-          class="font-size-14 text-truncate m-0 cursor-pointer d-inline"
+          class="font-size-14 text-truncate m-0 cursor-pointer"
           role="button"
         >
           {{ row.item.name }}

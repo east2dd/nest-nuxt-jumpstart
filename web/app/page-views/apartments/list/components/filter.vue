@@ -70,14 +70,14 @@ export default Vue.extend({
       </div>
       <div class="mb-3">
         <b-button
-          size="md"
+          size="sm"
           class="btn-info text-nowrap mr-1"
           @click="applyFilters()"
         >
           Apply
         </b-button>
         <b-button
-          size="md"
+          size="sm"
           class="btn-danger text-nowrap mr-1"
           @click="resetFilters()"
         >

@@ -55,7 +55,6 @@ export const FIELDS = [
     tdClass: 'align-middle text-right'
   }
 ]
-
 export const GOOGLE_MAP_OPTIONS = {
   zoomControl: true,
   mapTypeControl: false,
@@ -65,3 +64,5 @@ export const GOOGLE_MAP_OPTIONS = {
   fullscreenControl: true,
   disableDefaultUI: false
 }
+
+export const ITEMS_PER_PAGE = 10
