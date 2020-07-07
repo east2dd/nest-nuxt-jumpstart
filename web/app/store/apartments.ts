@@ -2,7 +2,7 @@ import { ActionTree, MutationTree } from 'vuex'
 import { Pagination, PaginationMeta } from '../common/pagination'
 import { alertSuccess, alertError } from './helper'
 import { RootState } from '~/store'
-import { SET_APARTMENT, SET_APARTMENTS } from '~/store/constants'
+import { SET_APARTMENT, SET_APARTMENTS, SET_SELECTED_APARTMENT } from '~/store/constants'
 import * as ApartmentsApi from '~/plugins/apis/apartments'
 
 const defaultPaginationMeta: PaginationMeta = {
@@ -14,14 +14,16 @@ const defaultPaginationMeta: PaginationMeta = {
 }
 export const state = () => ({
   items: { items: [], meta: defaultPaginationMeta } as Pagination,
-  item: {} as any
+  item: {} as any,
+  selectedItemId: 0 as number
 })
 
 export type TicketModuleState = ReturnType<typeof state>
 
 export const mutations: MutationTree<TicketModuleState> = {
   [SET_APARTMENTS]: (state, items) => (state.items = items),
-  [SET_APARTMENT]: (state, item) => (state.item = item)
+  [SET_APARTMENT]: (state, item) => (state.item = item),
+  [SET_SELECTED_APARTMENT]: (state, itemId) => (state.selectedItemId = itemId)
 }
 
 export const actions: ActionTree<TicketModuleState, RootState> = {
@@ -79,5 +81,8 @@ export const actions: ActionTree<TicketModuleState, RootState> = {
 
         throw err
       })
+  },
+  selectApartment({ commit }, itemId) {
+    commit(SET_SELECTED_APARTMENT, itemId)
   }
 }

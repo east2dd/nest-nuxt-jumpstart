@@ -4,9 +4,7 @@ import Vue from 'vue'
 import { mapState } from 'vuex'
 import { Apartment } from '../shared/interfaces'
 import { PaginationMeta } from '../../../common/pagination'
-import ApartmentTable from './components/table.vue'
-import ApartmentsOnMap from './components/google-maps.vue'
-import ApartmentFilter from './components/filter.vue'
+import { ApartmentTable, ApartmentsOnMap, ApartmentFilter } from './components'
 import { canNew } from './policy'
 
 export default Vue.extend({
@@ -80,7 +78,7 @@ export default Vue.extend({
                 v-b-toggle.collapse-filter 
                 variant="primary"
               >
-                Filter
+                <i class="mdi mdi-filter"></i>Filter
               </b-button>
               <b-collapse id="collapse-filter" class="mt-2">
                 <ApartmentFilter />

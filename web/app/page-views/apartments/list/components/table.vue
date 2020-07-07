@@ -4,8 +4,10 @@ import { mapState } from 'vuex'
 import { Apartment } from '../../shared/interfaces'
 import { FIELDS } from '../constants'
 import { canEdit } from '../policy'
+import { ApartmentDetails } from './'
 
 export default Vue.extend({
+  components: { ApartmentDetails },
   props: {
     items: { type: Array }
   },
@@ -25,6 +27,9 @@ export default Vue.extend({
     },
     showEdit(apartment: Apartment): boolean {
       return canEdit(this.auth.user, apartment)
+    },
+    selectApartment(itemId: number): void {
+      this.$store.dispatch('apartments/selectApartment', itemId)
     }
   }
 })
@@ -44,16 +49,14 @@ export default Vue.extend({
     >
       <template v-slot:cell(name)="row">
         <h6
-          id="popover-target-1"
-          class="font-size-14 text-truncate m-0 cursor-pointer"
+          :id="'popover-target-' + row.item.id"
+          class="font-size-14 text-truncate m-0 cursor-pointer d-inline"
           role="button"
         >
           {{ row.item.name }}
         </h6>
-        <b-popover target="popover-target-1" triggers="hover" placement="right">
-          <template v-slot:title>Popover Title</template>
-          I am popover <b>component</b> content!
-        </b-popover>
+        <ApartmentDetails :item="row.item"/>
+        
       </template>
       <template v-slot:cell(pricePerMonth)="row">
         $ {{ row.item.pricePerMonth }}
@@ -74,6 +77,7 @@ export default Vue.extend({
           class="action-icon text-info ml-1"
           title="View On Map"
           v-b-tooltip.hover.top
+          @click="selectApartment(row.item.id)"
         >
           <i class="mdi mdi-target" style="font-size:22px"></i>
         </a>

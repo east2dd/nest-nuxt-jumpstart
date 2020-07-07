@@ -32,6 +32,10 @@
       "google-maps-api-typings"
     ]
   },
+  "files": [
+    "./app/common/types/vue-shims.d.ts",
+    "./app/common/types/vue-global.d.ts"
+  ],
   "exclude": [
     "node_modules",
     ".nuxt",
