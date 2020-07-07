@@ -17,8 +17,8 @@ export const mutations: MutationTree<TicketModuleState> = {
 }
 
 export const actions: ActionTree<TicketModuleState, RootState> = {
-  getUsers({ commit }) {
-    return UsersApi.all()
+  getUsers({ commit }, params) {
+    return UsersApi.all(params)
       .then((res: any) => {
         commit(SET_USERS, res)
       })
