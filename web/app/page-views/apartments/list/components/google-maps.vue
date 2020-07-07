@@ -105,6 +105,9 @@ export default Vue.extend({
           </div>
         `;
     }
+  },
+  mounted() {
+    this.mapFitBounds()
   }
 })
 </script>

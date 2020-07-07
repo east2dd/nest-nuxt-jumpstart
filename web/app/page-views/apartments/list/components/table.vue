@@ -64,6 +64,7 @@ export default Vue.extend({
 
       <template v-slot:cell(actions)="row">
         <a
+          v-if="showEdit(row.item)"
           href="javascript:void(0);"
           class="action-icon text-primary"
           title="Edit Details"
