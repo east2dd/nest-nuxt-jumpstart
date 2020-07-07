@@ -57,4 +57,12 @@ export class CreateApartmentDto {
   @IsNumber()
   @IsNotEmpty()
   public readonly longitude: number
+
+  @ApiProperty({
+    name: 'state',
+    description: 'State of Apartment. 0: Available, 1: Rented',
+  })
+  @IsNumber()
+  @IsNotEmpty()
+  public readonly state: number
 }

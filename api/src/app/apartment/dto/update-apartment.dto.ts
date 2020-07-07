@@ -57,5 +57,13 @@ export class UpdateApartmentDto {
   @IsNumber()
   @IsOptional()
   public readonly longitude: number
+
+  @ApiProperty({
+    name: 'state',
+    description: 'State of Apartment. 0: Available, 1: Rented',
+  })
+  @IsNumber()
+  @IsOptional()
+  public readonly state: number
 }
 
