@@ -1,4 +1,4 @@
-import { required, numeric, decimal } from 'vuelidate/lib/validators'
+import { required, numeric, decimal, between } from 'vuelidate/lib/validators'
 
 export const UPDATE_ITEM_VALIDATIONS = {
   name: {
@@ -18,10 +18,23 @@ export const UPDATE_ITEM_VALIDATIONS = {
   },
   latitude: {
     required,
-    decimal
+    decimal,
+    between (value: number) {
+      return between(-90, 90)(value)
+    }
   },
   longitude: {
     required,
-    decimal
+    decimal,
+    between (value: number) {
+      return between(-180, 180)(value)
+    }
+  },
+  state: {
+    required,
+    numeric,
+    between (value: number) {
+      return between(0, 1)(value)
+    }
   }
 }

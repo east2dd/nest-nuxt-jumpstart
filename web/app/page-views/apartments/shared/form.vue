@@ -2,6 +2,7 @@
 import Vue from 'vue'
 import { Apartment } from '../shared/interfaces'
 import { getLatLngFromAddress } from '~/common/geocoder'
+import { APARTMENT_STATES } from './constants'
 
 export default Vue.extend({
   props: {
@@ -29,6 +30,11 @@ export default Vue.extend({
     return {
       submitted: false,
       addressPlaceholder: ""
+    }
+  },
+  computed: {
+    apartmentStateOptions(): Array<any> {
+      return APARTMENT_STATES;
     }
   },
   validations() {
@@ -104,6 +110,32 @@ export default Vue.extend({
           </b-form-group>
 
           <b-row>
+            <b-col 
+              cols="12" 
+              md="6"
+            >
+              <b-form-group
+                label="State:"
+              >
+                <b-form-select 
+                  name="state"
+                  v-model="item.state"
+                  :options="apartmentStateOptions"
+                  :class="{
+                    'is-invalid': submitted && $v.item.state.$error
+                  }"
+                />
+
+                <div
+                  v-if="submitted && $v.item.state.$error"
+                  class="invalid-feedback"
+                >
+                  <span v-if="!$v.item.state.required">
+                    Required
+                  </span>
+                </div>
+              </b-form-group>
+            </b-col>
             <b-col 
               cols="12" 
               md="6"
@@ -218,6 +250,9 @@ export default Vue.extend({
                   <span v-if="!$v.item.latitude.required">
                     Required
                   </span>
+                  <span v-if="!$v.item.latitude.decimal || !$v.item.latitude.between">
+                    Invalid
+                  </span>
                 </div>
               </b-form-group>
             </b-col>
@@ -242,6 +277,9 @@ export default Vue.extend({
                 >
                   <span v-if="!$v.item.longitude.required">
                     Required
+                  </span>
+                  <span v-if="!$v.item.longitude.decimal || !$v.item.longitude.between">
+                    Invalid
                   </span>
                 </div>
               </b-form-group>
