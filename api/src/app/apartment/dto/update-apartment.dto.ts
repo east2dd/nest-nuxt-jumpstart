@@ -1,4 +1,4 @@
-import { IsString, IsNumber, IsOptional } from 'class-validator'
+import { IsString, IsNumber, IsOptional, IsIn, Min, Max, IsInt } from 'class-validator'
 import { ApiProperty } from '@nestjs/swagger'
 
 export class UpdateApartmentDto {
@@ -38,7 +38,7 @@ export class UpdateApartmentDto {
     name: 'numberOfRooms',
     description: 'Price per month of Apartment',
   })
-  @IsNumber()
+  @IsInt()
   @IsOptional()
   public readonly numberOfRooms: number
 
@@ -48,6 +48,8 @@ export class UpdateApartmentDto {
   })
   @IsNumber()
   @IsOptional()
+  @Min(-90)
+  @Max(90)
   public readonly latitude: number
 
   @ApiProperty({
@@ -56,13 +58,15 @@ export class UpdateApartmentDto {
   })
   @IsNumber()
   @IsOptional()
+  @Min(-180)
+  @Max(180)
   public readonly longitude: number
 
   @ApiProperty({
     name: 'state',
     description: 'State of Apartment. 0: Available, 1: Rented',
   })
-  @IsNumber()
+  @IsIn([0, 1])
   @IsOptional()
   public readonly state: number
 }
