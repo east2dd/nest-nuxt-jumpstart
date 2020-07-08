@@ -3,6 +3,7 @@ import Vue from 'vue'
 import { mapState } from 'vuex'
 import { GOOGLE_MAP_OPTIONS } from '../constants'
 import { Apartment } from '../../shared/interfaces'
+import { getInfoWindowContent, nlToBr } from '../helper'
 
 export default Vue.extend({
   props: {
@@ -28,6 +29,8 @@ export default Vue.extend({
       this.selectApartmentAction(itemId)
     },
     mapFitBounds(): void{
+      if (this.items.length == 0) return;
+      
       this.$refs.map.$mapPromise.then((map: any) => {
         this.fit(map)
       })
@@ -49,62 +52,8 @@ export default Vue.extend({
           width: 0,
           height: -35
         },
-        content: this.getInfoContent(item)
+        content: getInfoWindowContent(item)
       }
-    },
-    getInfoContent(item: Apartment): string {
-      return `
-          <div class="table-responsive table-sm table-borderless m-0">
-            <table class="table mb-0">
-              <tbody>
-                <tr>
-                  <td>
-                    <strong>Name :</strong>
-                  </td>
-                  <td>
-                    <strong>
-                      ${item.name}
-                    </strong>
-                  </td>
-                </tr>
-                <tr>
-                  <td>State :</td>
-                  <td>
-                    <span class="text-success">
-                      Available
-                    </span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Description :</td>
-                  <td>
-                    <p class="m-0" style="white-space: pre !important;">${item.description}</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Price per month :</td>
-                  <td>
-                    $ ${ item.pricePerMonth }
-                  </td>
-                </tr>
-                <tr>
-                  <td>Number of rooms :</td>
-                  <td>${item.numberOfRooms}</td>
-                </tr>
-                <tr>
-                  <td>Price per Month :</td>
-                  <td>$ ${item.pricePerMonth}</td>
-                </tr>
-                <tr>
-                  <td>Position :</td>
-                  <td>
-                    ${item.latitude}, ${item.longitude}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        `;
     },
     moveCenter(position: any): void {
       this.$refs.map.$mapPromise.then((map: any) => {
@@ -145,9 +94,15 @@ export default Vue.extend({
   </gmap-map>
 </template>
 
-<style lang="css" scoped>
+<style lang="css">
   #map-canvas{
     width: 100%;
     height: calc(100vh - 300px);
+  }
+  #map-canvas .info-window-wrapper{
+    max-width: 400px;
+  }
+  #map-canvas .info-window-wrapper table tr td:first-child{
+    width: 120px;
   }
 </style>

@@ -6,7 +6,7 @@ import { APARTMENT_STATES } from './constants'
 
 export default Vue.extend({
   props: {
-    item: {
+    apartment: {
       type: Object
     },
     validationRules: {
@@ -24,12 +24,13 @@ export default Vue.extend({
     deleteAction: {
       required: false,
       type: Function
-    }
+    },
   },
   data() {
     return {
-      submitted: false,
-      addressPlaceholder: ""
+      submitted: true,
+      addressPlaceholder: "",
+      item: { ...this.apartment }
     }
   },
   computed: {
@@ -42,6 +43,12 @@ export default Vue.extend({
       item: this.validationRules
     }
   },
+  watch : {
+    apartment() {
+      this.item = { ...this.apartment }
+    },
+  },
+
   methods: {
     openList() {
       this.$router.push('/apartments')
@@ -51,14 +58,17 @@ export default Vue.extend({
       this.$v.$touch()
       if (this.$v.$invalid) return
 
-      this.submitAction()
+      this.submitAction(this.item)
     },
     async handleChangeAddress() {
       const [lat, lng] = await getLatLngFromAddress(this.addressPlaceholder)
       
       this.item.latitude = lat
       this.item.longitude = lng
-      this.$forceUpdate()
+    },
+    handleEnterKeyOnAddress(event: any):void {
+      event.preventDefault()
+      this.handleChangeAddress()
     }
   }
 })
@@ -219,14 +229,6 @@ export default Vue.extend({
             </b-col>
           </b-row>
 
-          <b-form-group>
-            <b-form-input
-              placeholder="Input full address or zipcode"
-              v-model="addressPlaceholder"
-              @change="handleChangeAddress"
-            />
-          </b-form-group>
-
           <b-row>
             <b-col>
               <b-form-group
@@ -285,6 +287,17 @@ export default Vue.extend({
               </b-form-group>
             </b-col>
           </b-row>
+
+          <b-form-group
+            description="Please input valid address or zipcode to get Latitude and Longitude easily."
+            >
+            <b-form-input
+              placeholder="Address or zipcode"
+              v-model="addressPlaceholder"
+              @change="handleChangeAddress"
+              @keydown.enter="handleEnterKeyOnAddress"
+            />
+          </b-form-group>
         </b-col>
       </b-row>
       

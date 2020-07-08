@@ -62,7 +62,9 @@ export const GOOGLE_MAP_OPTIONS = {
   streetViewControl: false,
   rotateControl: false,
   fullscreenControl: true,
-  disableDefaultUI: false
+  disableDefaultUI: false,
+  clickableIcons: false
 }
 
 export const ITEMS_PER_PAGE = 10
+export const TABLE_EMPTY_TEXT = "There are no aparments records in the list."

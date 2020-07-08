@@ -2,7 +2,7 @@
 import Vue from 'vue'
 import { mapState } from 'vuex'
 import { Apartment } from '../../shared/interfaces'
-import { FIELDS } from '../constants'
+import { FIELDS, TABLE_EMPTY_TEXT } from '../constants'
 import { canEdit } from '../policy'
 import { ApartmentDetails } from './'
 
@@ -17,7 +17,8 @@ export default Vue.extend({
     return {
       fields: FIELDS,
       sortBy: 'name',
-      sortDesc: false
+      sortDesc: false,
+      tableEmptyText: TABLE_EMPTY_TEXT
     }
   },
   computed: {
@@ -42,6 +43,8 @@ export default Vue.extend({
     <b-table
       class="table table-centered mb-0 table-nowrap"
       thead-class="thead-light"
+      show-empty
+      :empty-text="tableEmptyText"
       :items="items"
       :fields="fields"
       responsive="sm"

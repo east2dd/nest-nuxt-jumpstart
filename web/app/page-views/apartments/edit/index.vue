@@ -23,8 +23,8 @@ export default Vue.extend({
     fetchItem() {
       this.$store.dispatch('apartments/getApartment', this.$route.params.id)
     },
-    updateApartment() {
-      this.$store.dispatch('apartments/updateApartment', this.item).then(() => {
+    updateApartment(item: Apartment) {
+      this.$store.dispatch('apartments/updateApartment', item).then(() => {
         this.openList()
       })
     },
@@ -50,7 +50,7 @@ export default Vue.extend({
       <ApartmentForm
         title="EDIT APARTMENT"
         :isEditMode="true"
-        :item="item"
+        :apartment="item"
         :validationRules="validations"
         :submitAction="updateApartment"
         :deleteAction="deleteItem"

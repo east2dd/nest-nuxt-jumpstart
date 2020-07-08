@@ -8,15 +8,15 @@ export default Vue.extend({
   components: { ApartmentForm },
   data() {
     return {
-      item: {} as Apartment,
+      item: { latitude: 0, longitude: 0, description: "" } as Apartment,
       validations: CREATE_ITEM_VALIDATIONS
     }
   },
 
   methods: {
-    createApartment() {
+    createApartment(item: Apartment) {
 
-      this.$store.dispatch('apartments/createApartment', this.item).then(() => {
+      this.$store.dispatch('apartments/createApartment', item).then(() => {
         this.openList()
       })
     },
@@ -32,8 +32,8 @@ export default Vue.extend({
     <b-col sm="12" md="6">
       <ApartmentForm
         title="NEW APARTMENT"
-        isEditMode=false
-        :item="item"
+        :isEditMode=false
+        :apartment="item"
         :validationRules="validations"
         :submitAction="createApartment"
       />

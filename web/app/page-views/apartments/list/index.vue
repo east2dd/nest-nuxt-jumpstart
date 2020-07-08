@@ -66,6 +66,9 @@ export default Vue.extend({
             })
           }
         })
+    },
+    showPagination(): boolean {
+      return this.items.length > 0
     }
   }
 })
@@ -109,7 +112,10 @@ export default Vue.extend({
                 :selectApartmentAction="selectApartment"
               />
             </b-col>
-            <b-col cols="12">
+            <b-col 
+              cols="12"
+              v-if="showPagination()"
+            >
               <ApartmentPagination />
             </b-col>
           </b-row>

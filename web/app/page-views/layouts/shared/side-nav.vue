@@ -41,3 +41,9 @@ export default Vue.extend({
     </ul>
   </div>
 </template>
+
+<style lang="css" scoped>
+  #side-menu .nuxt-link-active, #side-menu .nuxt-link-active i {
+    color: #fff !important;
+  }
+</style>

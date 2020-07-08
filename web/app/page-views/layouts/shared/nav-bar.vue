@@ -25,8 +25,13 @@ export default Vue.extend({
     <div class="navbar-header">
       <div class="d-flex">
         <div class="navbar-brand-box">
-          <a href="/" class="logo">
-            TEST
+          <a href="/" class="logo logo-light">
+            <span class="logo-sm">
+              TH
+            </span>
+            <span class="logo-lg">
+              Take-Home
+            </span>
           </a>
         </div>
 
@@ -46,17 +51,7 @@ export default Vue.extend({
             <span class="d-none d-xl-inline-block ml-1">
               {{ auth.user.firstName }} {{ auth.user.lastName }}
             </span>
-            <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
-          </template>
-          <a
-            class="dropdown-item"
-            href="javascript: void(0);"
-            @click="openMyApartments"
-          >
-            <i class="bx bx-home font-size-16 align-middle mr-1"></i>
-            My Apartments
-          </a>
-          <div class="dropdown-divider"></div>
+          </template>          
           <a
             class="dropdown-item text-danger"
             href="javascript: void(0);"
@@ -72,3 +67,11 @@ export default Vue.extend({
     </div>
   </header>
 </template>
+
+<style lang="css">
+  .navbar-brand-box .logo{
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #ffffff;
+  }
+</style>
