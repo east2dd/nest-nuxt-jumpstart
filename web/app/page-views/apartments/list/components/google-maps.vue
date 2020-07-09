@@ -97,7 +97,7 @@ export default Vue.extend({
 <style lang="css">
   #map-canvas{
     width: 100%;
-    height: calc(100vh - 300px);
+    height: 100%;
   }
   #map-canvas .info-window-wrapper{
     max-width: 400px;

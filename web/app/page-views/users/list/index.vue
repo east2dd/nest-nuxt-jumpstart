@@ -96,15 +96,15 @@ export default Vue.extend({
                 </template>
 
                 <template v-slot:cell(actions)="row">
-                  <div class="text-center">
-                    <b-button
-                      size="sm"
-                      class="btn-info text-nowrap mr-1"
-                      @click="openEditPage(row.item.id)"
-                    >
-                      Edit
-                    </b-button>
-                  </div>
+                  <a
+                    href="javascript:void(0);"
+                    class="action-icon text-primary"
+                    title="Edit User"
+                    v-b-tooltip.hover.top
+                    @click="openEditPage(row.item.id)"
+                  >
+                    <i class="mdi mdi-account-edit-outline" style="font-size:22px"></i>
+                  </a>
                 </template>
               </b-table>
             </div>

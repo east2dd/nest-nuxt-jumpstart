@@ -37,6 +37,12 @@ export const FIELDS = [
     tdClass: 'text-muted align-middle pl-5'
   },
   {
+    key: 'state',
+    sortable: true,
+    thClass: 'text-info',
+    tdClass: 'text-muted'
+  },
+  {
     key: 'user',
     thClass: 'text-info align-middle d-none',
     tdClass: 'align-middle d-none'

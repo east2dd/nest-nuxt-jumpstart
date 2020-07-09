@@ -45,16 +45,22 @@ export default Vue.extend({
           <tr>
             <td>Price per month :</td>
             <td>
-              $ {{ item.pricePerMonth }}
+              <strong>$ {{ item.pricePerMonth }}</strong>
             </td>
           </tr>
           <tr>
             <td>Number of rooms :</td>
-            <td>{{ item.numberOfRooms }}</td>
+            <td>
+              <strong>{{ item.numberOfRooms }}</strong>
+            </td>
           </tr>
           <tr>
             <td>Floor area size :</td>
-            <td>{{ item.floorAreaSize }} m<sup>2</sup></td>
+            <td>
+              <strong>
+                {{ item.floorAreaSize }} m<sup>2</sup>
+              </strong>
+            </td>
           </tr>
           <tr>
             <td>Position :</td>

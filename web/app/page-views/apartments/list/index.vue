@@ -90,8 +90,8 @@ export default Vue.extend({
     </b-row>
 
     <b-row>
-      <b-col md="5">
-        <b-card>
+      <b-col md="6">
+        <b-card class="apartments-table-wrapper mb-0">
           <b-row>
             <b-col cols="12">
               <b-button
@@ -121,8 +121,8 @@ export default Vue.extend({
           </b-row>
         </b-card>
       </b-col>
-      <b-col md="7">
-        <b-card>
+      <b-col md="6">
+        <b-card class="google-maps-container mb-0">
           <ApartmentsOnMap
             ref="apartmentsMap"
             :items="items"
@@ -134,4 +134,9 @@ export default Vue.extend({
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="css" scoped>
+.google-maps-container{
+  height: calc(100vh - 200px);
+  overflow: hidden;
+}
+</style>

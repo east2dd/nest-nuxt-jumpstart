@@ -1,5 +1,6 @@
 <script lang="ts">
 import Vue from 'vue'
+import Swal from "sweetalert2";
 import ApartmentForm from '../shared/form.vue'
 import { Apartment } from '../shared/interfaces'
 import { UPDATE_ITEM_VALIDATIONS } from './constants'
@@ -29,13 +30,22 @@ export default Vue.extend({
       })
     },
     deleteItem() {
-      if (!confirm('Do you want to delete this item?')) return
-
-      this.$store
-        .dispatch('apartments/deleteApartment', this.item.id)
-        .then(() => {
-          this.openList()
-        })
+      Swal.fire({
+        title: "Are you sure to delete this apartment?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#f46a6a",
+        cancelButtonColor: "#34c38f",
+        confirmButtonText: "Yes, delete it!"
+      }).then(result => {
+        if (result.value) {
+          this.$store
+            .dispatch('apartments/deleteApartment', this.item.id)
+            .then(() => {
+              this.openList()
+            })
+        }
+      })
     },
     openList() {
       this.$router.push('/apartments')

@@ -1,26 +1,26 @@
 export const FIELDS = [
   {
-    key: 'email',
+    key: 'name',
     sortable: false,
-    thClass: 'text-info align-middle',
+    thClass: 'align-middle',
     tdClass: 'align-middle'
   },
   {
-    key: 'name',
+    key: 'email',
     sortable: false,
-    thClass: 'text-info align-middle',
+    thClass: 'align-middle',
     tdClass: 'align-middle'
   },
   {
     key: 'role',
     sortable: false,
-    thClass: 'text-info align-middle',
+    thClass: 'align-middle',
     tdClass: 'align-middle'
   },
   {
     key: 'actions',
-    label: '',
-    thClass: 'text-info align-middle',
+    label: 'Action',
+    thClass: 'align-middle',
     tdClass: 'align-middle'
   }
 ]

@@ -5,9 +5,9 @@ import Vue from 'vue'
 export default Vue.extend({
   data() {
     return {
-      pricePerMonth: [0, 5000],
+      pricePerMonth: [0, 10000],
       floorAreaSize: [0, 1000],
-      numberOfRooms: [0, 20]
+      numberOfRooms: [0, 50]
     }
   },
   methods: {
@@ -22,9 +22,9 @@ export default Vue.extend({
       this.$router.push(`/apartments?${querystring.stringify(query)}`)
     },
     resetFilters() {
-      this.pricePerMonth = [0, 5000]
+      this.pricePerMonth = [0, 10000]
       this.floorAreaSize = [0, 1000]
-      this.numberOfRooms = [0, 20]
+      this.numberOfRooms = [0, 50]
 
       this.$router.push(`/apartments`)
     }
@@ -42,7 +42,7 @@ export default Vue.extend({
           v-model="pricePerMonth"
           :enable-cross="false"
           :min="0"
-          :max="5000"
+          :max="10000"
         ></vue-slider>
         <div>{{ pricePerMonth[0] }} ~ {{ pricePerMonth[1] }} ($)</div>
       </div>
@@ -55,7 +55,7 @@ export default Vue.extend({
           :min="0"
           :max="1000"
         ></vue-slider>
-        <div>{{ floorAreaSize[0] }} ~ {{ floorAreaSize[1] }} (m x m)</div>
+        <div>{{ floorAreaSize[0] }} ~ {{ floorAreaSize[1] }} (m<sup>2</sup>)</div>
       </div>
       <div class="mb-3">
         <div>Number Or Rooms</div>
@@ -64,7 +64,7 @@ export default Vue.extend({
           v-model="numberOfRooms"
           :enable-cross="false"
           :min="0"
-          :max="20"
+          :max="50"
         ></vue-slider>
         <div>{{ numberOfRooms[0] }} ~ {{ numberOfRooms[1] }}</div>
       </div>

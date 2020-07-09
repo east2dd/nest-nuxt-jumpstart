@@ -67,6 +67,12 @@ export default Vue.extend({
         $ {{ row.item.pricePerMonth }}
       </template>
 
+      <template v-slot:cell(state)="row">
+        <span :class="`${row.item.state == 0 ? 'text-success' : 'text-danger'}`">
+          {{ row.item.state == 0 ? 'Available' : 'Rented' }}
+        </span>
+      </template>
+
       <template v-slot:cell(actions)="row">
         <a
           v-if="showEdit(row.item)"

@@ -1,8 +1,11 @@
 <script lang="ts">
 import Vue from 'vue'
+import Swal from "sweetalert2";
+import { mapState } from 'vuex'
 import { User } from '../shared/interfaces'
 import { USER_ROLE_OPTIONS } from '../shared/constants'
 import { UPDATE_ITEM_VALIDATIONS } from './constants'
+import { canDelete } from './policy'
 
 export default Vue.extend({
   data() {
@@ -17,8 +20,12 @@ export default Vue.extend({
     item: UPDATE_ITEM_VALIDATIONS
   },
   computed: {
+    ...mapState(['auth']),
     item(): User {
       return Object.assign({}, this.$store.state.users.item)
+    },
+    showDelete(): boolean {
+      return canDelete(this.auth.user, this.item)
     }
   },
   created() {
@@ -39,10 +46,19 @@ export default Vue.extend({
       })
     },
     deleteItem() {
-      if (!confirm('Do you want to delete this user?')) return
+      Swal.fire({
+        title: "Are you sure to delete this user?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#f46a6a",
+        cancelButtonColor: "#34c38f",
+        confirmButtonText: "Yes, delete it!"
+      }).then(result => {
+        if (!result.value) return
 
-      this.$store.dispatch('users/deleteUser', this.item.id).then(() => {
-        this.openList()
+        this.$store.dispatch('users/deleteUser', this.item.id).then(() => {
+          this.openList()
+        })
       })
     },
     openList() {
@@ -158,7 +174,8 @@ export default Vue.extend({
           </b-row>
 
           <b-form-group>
-            <b-button 
+            <b-button
+              v-if="showDelete"
               variant="danger" 
               @click="deleteItem"
             >
