@@ -60,7 +60,7 @@
     "jquery": "^3.4.1",
     "metismenujs": "^1.1.0",
     "net": "^1.0.2",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "prettier": "^1.19.1",
     "pupa": "^2.0.1",
     "sass-loader": "^8.0.2",
